@@ -1,0 +1,20 @@
+.term {
+	font-family: monospace;;
+	font-size: 12px;
+	color: #7FFF00;
+	background: black;
+}
+
+.termReverse {
+	color: #111111;
+	background: #7FFF00;
+}
+
+
+.rules {
+	float: right;
+}
+
+#canvas {
+	background-color: blue;
+}

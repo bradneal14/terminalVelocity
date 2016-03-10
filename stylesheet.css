@@ -1,0 +1,23 @@
+#first{
+  background-color: blue;
+  color: black;
+}
+
+#second{
+  background-color: red;
+  color: white;
+}
+
+
+.textbox {
+  width: 190px;
+  margin-top: -100px;
+  background-color: red;
+  position: absolute;
+}
+
+.terminal-div{
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
