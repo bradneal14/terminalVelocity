@@ -18,3 +18,15 @@
 #canvas {
 	background-color: blue;
 }
+
+
+.first-level{
+	left: 0px !important;
+  top: 0px !important;
+  visibility: visible;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  position: absolute;
+  border: none;
+}

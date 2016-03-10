@@ -416,7 +416,7 @@ type: function(text,style) {
 		this._incCol();
 		if (this.r!=last_r) this.redraw(last_r);
 	}
-	this.redraw(this.r)
+	this.redraw(this.r);
 },
 
 write: function(text,usemore) {
@@ -507,6 +507,9 @@ write: function(text,usemore) {
 	this._sbOut();
 },
 
+
+
+
 // parse a color markup
 _parseColor: function(chunk) {
 	var rest='';
@@ -588,6 +591,7 @@ _sbInit: function(usemore) {
 		sbs[0][i]=this.styleBuf[this.r][i];
 	}
 },
+
 
 _sbType: function(text,style) {
 	// type to scroll buffer

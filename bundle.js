@@ -48,6 +48,194 @@
 	var $ = __webpack_require__(2);
 
 
+	var zeroTerm_A = new Terminal({
+	  handler: zeroTermHandler_A,
+	  greeting: "Thanks for checking out Terminal Velocity by Brad Neal. \n \nUnfortuneately we're having some technical difficulties right now. \nMy server crashed and took the game down with it, but all of the code is written and ready to go. \nIt's still possible for you to play, but you'll have to hack yourself together a basic mainframe first. \nI can show you how; type '#begin' and then press Enter to access my console remotely.",
+	  textColor: "white",
+	  termDiv:'main',
+	  crsrBlockMode: false,
+	  cols:220,
+	  rows:150,
+	});
+
+	function zeroTermHandler_A(){
+	  var line_0A = this.lineBuffer;
+	  if (line_0A != "#begin"){
+	    this.newLine();
+	    this.type("Command not recognized.");
+	  } else {
+	    window.setTimeout(function(){zeroTerm_A.type("."); zeroTerm_A.newLine();}, 500);
+	    window.setTimeout(function(){zeroTerm_A.type("> .."); zeroTerm_A.newLine();}, 1500);
+	    window.setTimeout(function(){zeroTerm_A.type("> ...");}, 2500);
+	    window.setTimeout(function(){zeroTerm_A.type(".");}, 2600);
+	    window.setTimeout(function(){zeroTerm_A.type(".");}, 2700);
+	    window.setTimeout(function(){zeroTerm_A.type(".");}, 2800);
+	    window.setTimeout(function(){zeroTerm_A.type(".");}, 2900);
+	    window.setTimeout(function(){zeroTerm_A.type(".");}, 3000);
+	    window.setTimeout(function(){zeroTerm_A.type(".");}, 3100);
+	    window.setTimeout(function(){zeroTerm_A.type(".");}, 3150);
+	    window.setTimeout(function(){zeroTerm_A.type(".");}, 3200);
+	    window.setTimeout(function(){zeroTerm_A.type(".");}, 3250);
+	    window.setTimeout(function(){zeroTerm_A.close();}, 3600);
+	    window.setTimeout(function(){zeroTerm_B.open();}, 3600);
+	  }
+	  this.prompt();
+	}
+
+	var zeroTerm_B = new Terminal({
+	  handler: zeroTermHandler_B,
+	  greeting: ">\n>\n>\n>\n>\n>\n>\n>\n>\nAwesome. With a litle luck we may actually be able to pull this off. \nMy server is programmed to my custom settings which are a little bit unconventional. \nI use '#open' to enter into my server-terminal. \nTry it now and let's see if we can get the ball rolling.",
+	  textColor: "white",
+	  termDiv:'main',
+	  crsrBlockMode: false,
+	  cols:320,
+	  rows:150,
+	});
+
+	function zeroTermHandler_B(){
+	  var line_0B = this.lineBuffer;
+	  console.log(line_0B);
+	  if (line_0B != "#open"){
+	    this.newLine();
+	    this.type("Command not recognized.");
+	  } else {
+	    window.setTimeout(function(){zeroTerm_B.type("."); zeroTerm_B.newLine();}, 1000);
+	    window.setTimeout(function(){zeroTerm_B.type("> .."); zeroTerm_B.newLine();}, 2000);
+	    window.setTimeout(function(){zeroTerm_B.type("> ...");}, 2500);
+	    window.setTimeout(function(){zeroTerm_B.type(".");}, 2600);
+	    window.setTimeout(function(){zeroTerm_B.type(".");}, 2700);
+	    window.setTimeout(function(){zeroTerm_B.type(".");}, 2800);
+	    window.setTimeout(function(){zeroTerm_B.type(".");}, 2900);
+	    window.setTimeout(function(){zeroTerm_B.type(".");}, 3000);
+	    window.setTimeout(function(){zeroTerm_B.type(".");}, 3100);
+	    window.setTimeout(function(){zeroTerm_B.type(".");}, 3150);
+	    window.setTimeout(function(){zeroTerm_B.type(".");}, 3200);
+	    window.setTimeout(function(){zeroTerm_B.type("."); zeroTerm_B.textColor = "#7FFF00";}, 3250);
+	    window.setTimeout(function(){zeroTerm_B.type(".");}, 3250);
+	    window.setTimeout(function(){zeroTerm_B.close();}, 3600);
+	    window.setTimeout(function(){zeroTerm_C.open();}, 3600);
+	  }
+	  this.prompt();
+	}
+
+	var zeroTerm_C = new Terminal({
+	  handler: zeroTermHandler_C,
+	  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\nExcellent. We're in. \nYou can tell when we're in the server-terminal because it uses green text. \nYou can always enter this server-terminal by using that same '#open' command. \nFrom here, we will be able to enter code which goes directly to my database. \nThe '#' symbol is a special symbol that I use to communicate with the server-terminal. \nLike I mentioned earlier, we may be able to pull this off, but it won't be easy. \nType '#continue' to learn about the next steps.",
+	  termDiv:'main',
+	  crsrBlockMode: false,
+	  cols:220,
+	  rows:150,
+	});
+
+	function zeroTermHandler_C(){
+	  var line_0C = this.lineBuffer;
+	  if (line_0C != "#continue"){
+	    this.newLine();
+	    this.type("Command not recognized.");
+	  } else {
+	    window.setTimeout(function(){zeroTerm_C.type(".");}, 500);
+	    window.setTimeout(function(){zeroTerm_C.type(".");}, 600);
+	    window.setTimeout(function(){zeroTerm_C.type(".");}, 700);
+	    window.setTimeout(function(){zeroTerm_C.type(".");}, 750);
+	    window.setTimeout(function(){zeroTerm_C.type(".");}, 800);
+	    window.setTimeout(function(){zeroTerm_C.close();}, 800);
+	    window.setTimeout(function(){zeroTerm_D.open();}, 800);
+	  }
+	  this.prompt();
+	}
+
+	var zeroTerm_D = new Terminal({
+	  handler: zeroTermHandler_D,
+	  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\nBoom.\nIf you couldn't tell, we are still in the server-terminal. \nWe will always use '#open' to get into the server-terminal. \nFrom inside the code terminal we will be able to enter real JavaScript. \nThe JavaScript we enter will (hopefully) be enough to get this game up and running. \nOnce in this server-terminal, the compiler expects the user to enter pure JavaScript. \nTo get out of the server-terminal we will have to use another one of my custom commands; '#submit'. \n'#submit' tells the compiler that we have finished writing our JavaScript.\nThink of it like a period, marking the end of a sentence. \nWhen the server receives the '#submit' command, it will execute the JavaScript which came before the '#submit'.\n'#submit' is not JavaScipt, but is instead a custom command I created for personal server maintence.\nThe '#submit' command tells the server that we would like our code to be logged to the server. \nTry it now by typing '#submit' and pressing enter.",
+	  termDiv:'main',
+	  crsrBlockMode: false,
+	  cols:220,
+	  rows:150,
+	});
+
+	function zeroTermHandler_D(){
+	  var line_0D = this.lineBuffer;
+	  if (line_0D != "#submit"){
+	    this.newLine();
+	    this.type("Command not recognized.");
+	  } else {
+	    window.setTimeout(function(){zeroTerm_D.type("."); zeroTerm_D.textColor="white";}, 500);
+	    window.setTimeout(function(){zeroTerm_D.type(".");}, 600);
+	    window.setTimeout(function(){zeroTerm_D.type(".");}, 700);
+	    window.setTimeout(function(){zeroTerm_D.type(".");}, 750);
+	    window.setTimeout(function(){zeroTerm_D.type(".");}, 800);
+	    window.setTimeout(function(){zeroTerm_D.close();}, 800);
+	    window.setTimeout(function(){zeroTerm_E.open();}, 800);
+	  }
+	  this.prompt();
+	}
+
+	var zeroTerm_E = new Terminal({
+	  handler: zeroTermHandler_E,
+	  greeting: "Sweet.. We just might have a shot afterall.\nOkay, now lets run through the whole thing and see what it will really be like.\nEnter '#open' to get back into the server-terminal \nOnce inside, type 'server.status();' to see the server's status and then press enter. \nThe punctuation is important; 'server.status();'\nThats 'server' (dot) 'status' followed by a set of empty parenthesis and a semi-colon.\nThe quotes are not necessary.\nOnce you type that command press enter. On the next line, type '#submit' \nThe '#submit' command will tell the server we are done writing JavaScript.\nThis will run our status check on the server and exit the server-terminal. \nIt's risky to spend too much time in the server-terminal so try and be quick if you can. \nRemember, if things get messy, you can type 'reset' followed by enter to reset the current session.\n>\nTo recap:\n1. type '#open' here and press enter. Wait to be connected to the server-terminal.\n2. Once inside, type server.status(); and press enter.\n3. On the next line, type '#submit' and press enter.\n>\nOnce you are inside the server-terminal we will have no way of communicating until you '#submit'. \nHope to see you back here soon.",
+	  termDiv:'main',
+	  crsrBlockMode: false,
+	  cols:220,
+	  rows:150,
+	  textColor: "white"
+	});
+
+	function zeroTermHandler_E(){
+	  var line_E = this.lineBuffer;
+	  if (line_E != "#open") {
+	    this.newLine();
+	    this.type("Command not recognized.");
+	  } else {
+	    window.setTimeout(function(){zeroTerm_E.type("."); zeroTerm_E.newLine();}, 1000);
+	    window.setTimeout(function(){zeroTerm_E.type("> .."); zeroTerm_E.newLine();}, 2000);
+	    window.setTimeout(function(){zeroTerm_E.type("> ...");}, 2500);
+	    window.setTimeout(function(){zeroTerm_E.type(".");}, 2600);
+	    window.setTimeout(function(){zeroTerm_E.type(".");}, 2700);
+	    window.setTimeout(function(){zeroTerm_E.type(".");}, 2800);
+	    window.setTimeout(function(){zeroTerm_E.type(".");}, 2900);
+	    window.setTimeout(function(){zeroTerm_E.type(".");}, 3000);
+	    window.setTimeout(function(){zeroTerm_E.type(".");}, 3100);
+	    window.setTimeout(function(){zeroTerm_E.type(".");}, 3150);
+	    window.setTimeout(function(){zeroTerm_E.type(".");}, 3200);
+	    window.setTimeout(function(){zeroTerm_E.type("."); zeroTerm_E.textColor = "#7FFF00";}, 3250);
+	    window.setTimeout(function(){zeroTerm_E.type(".");}, 3250);
+	    window.setTimeout(function(){zeroTerm_E.close();}, 3600);
+	    window.setTimeout(function(){zeroTerm_F.open();}, 3600);
+	  }
+	  this.prompt();
+	}
+
+	var zeroTerm_F = new Terminal({
+	  handler: zeroTermHandler_F,
+	  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\n>\n",
+	  termDiv:'main',
+	  crsrBlockMode: false,
+	  cols:220,
+	  rows:150,
+	  textColor: "#7FFF00"
+	});
+
+	function zeroTermHandler_F(){
+	  var line_F = this.lineBuffer;
+	  console.log("LINE", line_F);
+	  var codeInj0 = this.codeInj0 || "";
+	  console.log("CODE BEFORE ANYTHING", this.codeInj0);
+	  if (line_F == "reset") {
+	    this.reset();
+	  }else if (line_F == "#submit") {
+	    evaluate(codeInj0, 0);
+	    this.codeInj0 = "";
+	  } else {
+	    this.codeInj0 = codeInj0 + line_F;
+	    console.log("CODE AFTER FIRE", this.codeInj0);
+	  }
+	  this.prompt();
+	}
+
+
+
+	zeroTerm_A.open();
+
 	var firstTerm_A = new Terminal({
 	  handler: firstTermHandler_A,
 	  greeting: "Welcome to level 1. \nEnter 'help' to see your toolbelt for this level.\nWhen ready, enter '#open' to attempt a submission.",
@@ -58,8 +246,7 @@
 	var firstTerm_B = new Terminal({
 	  handler: firstTermHandler_B,
 	  greeting: "Level 1. Type '#submit' to run. \nInsert code here:",
-	  initHandler: reloadTitle,
-	  ps: "/$",
+	  initHandler: reloadTitle
 	});
 
 	var reloadTitle = function(){
@@ -302,12 +489,73 @@
 	  this.prompt();
 	}
 
+	var meltDown = new Terminal({
+	  textColor: "white",
+	  handler: meltDownHandler,
+	  greeting: "/$ ERROR--SYSTEM_MELTDOWN! (v1.0.1.1) \n>\n>\n>\n",
+	  termDiv:'main',
+	  crsrBlockMode: false,
+	  cols:220,
+	  rows:150,
+	  initHandler: meltDownFunction
+	});
 
+
+	function meltDownFunction(){
+	  window.setTimeout(function(){meltDown.type("."); meltDown.newLine();}, 2000);
+	  window.setTimeout(function(){meltDown.type("> .."); meltDown.newLine();}, 2100);
+	  window.setTimeout(function(){meltDown.type("> ...");}, 2200);
+	  window.setTimeout(function(){meltDown.textColor = "red"; meltDown.type("> ERROR");}, 2200);
+	  window.setTimeout(function(){meltDown.newLine(); meltDown.type(".");}, 2500);
+	  window.setTimeout(function(){meltDown.newLine(); meltDown.type(".");}, 2800);
+	  window.setTimeout(function(){meltDown.newLine(); meltDown.type(".");}, 3300);
+	  window.setTimeout(function(){meltDown.newLine(); meltDown.type(">>>>>>>Access DENIED<<<<<<<");}, 3350);
+	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3450);
+	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3500);
+	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3550);
+	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3600);
+	  window.setTimeout(function(){meltDown.type(">>>>>>>GAME OVER<<<<<<<"); meltDown.newLine();}, 3600);
+	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3700);
+	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3800);
+	  window.setTimeout(function(){meltDown.type("<<<<<<<YOU LOOSE!>>>>>>>"); meltDown.newLine();}, 3600);
+	  window.setTimeout(function(){meltDown.close();}, 10000);
+	  window.setTimeout(function(){zeroTerm_A.open();}, 10000);
+	}
+	function meltDownHandler(){
+	  var line_MD = this.lineBuffer;
+	}
 
 
 	function evaluate(block, level){
 	  console.log("BLOCK", block);
 	  var codeStr = block.replace(/ +?/g, '');
+	  if (level === 0){
+	    if (codeStr != "server.status();"){
+	      zeroTerm_F.close();
+	      meltDown.open();
+	    } else {
+	      window.setTimeout(function(){zeroTerm_F.type("."); zeroTerm_F.newLine();}, 2000);
+	      window.setTimeout(function(){zeroTerm_F.type("> .."); zeroTerm_F.newLine();}, 2100);
+	      window.setTimeout(function(){zeroTerm_F.type("> ...");}, 2200);
+	      window.setTimeout(function(){zeroTerm_F.type("> Initializing");}, 2200);
+	      window.setTimeout(function(){zeroTerm_F.type(".");}, 2500);
+	      window.setTimeout(function(){zeroTerm_F.type(".");}, 2800);
+	      window.setTimeout(function(){zeroTerm_F.type(".");}, 3300);
+	      window.setTimeout(function(){zeroTerm_F.newLine(); zeroTerm_F.type(">>>>>>>Access Granted<<<<<<<");}, 3350);
+	      window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 3450);
+	      window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 3500);
+	      window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 3550);
+	      window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 3600);
+	      window.setTimeout(function(){zeroTerm_F.type(">>>>>>>GAME OVER<<<<<<<"); zeroTerm_F.newLine();}, 3600);
+	      window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 3700);
+	      window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 3800);
+	      window.setTimeout(function(){zeroTerm_F.type("<<<<<<<YOU WIN!>>>>>>>"); zeroTerm_F.newLine();}, 3600);
+	      window.setTimeout(function(){zeroTerm_F.close();}, 15000);
+	      window.setTimeout(function(){zeroTerm_A.open();}, 15000);
+
+
+	    }
+	  }
 	  if (level === 1) {
 	    if (codeStr == "x=14;" || codeStr == "14" || codeStr == "x=14"){
 	      console.log("we made it");
@@ -851,7 +1099,7 @@
 			this._incCol();
 			if (this.r!=last_r) this.redraw(last_r);
 		}
-		this.redraw(this.r)
+		this.redraw(this.r);
 	},
 
 	write: function(text,usemore) {
@@ -942,6 +1190,9 @@
 		this._sbOut();
 	},
 
+
+
+
 	// parse a color markup
 	_parseColor: function(chunk) {
 		var rest='';
@@ -1023,6 +1274,7 @@
 			sbs[0][i]=this.styleBuf[this.r][i];
 		}
 	},
+
 
 	_sbType: function(text,style) {
 		// type to scroll buffer
