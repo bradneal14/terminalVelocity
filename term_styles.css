@@ -30,3 +30,15 @@
   position: absolute;
   border: none;
 }
+
+.second-level{
+
+}
+
+.full{
+	max-height: 1500px;
+}
+.hidden{
+	max-height: 0px !important;
+	visibility: hidden !important!;
+}

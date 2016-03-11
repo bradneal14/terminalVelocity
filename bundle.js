@@ -48,6 +48,45 @@
 	var $ = __webpack_require__(2);
 
 
+	var meltDown = new Terminal({
+	  textColor: "white",
+	  handler: meltDownHandler,
+	  greeting: "/$ ERROR--SYSTEM_MELTDOWN! (v1.0.1.1) \n>\n>\n>\n",
+	  termDiv:'main',
+	  crsrBlockMode: false,
+	  cols:220,
+	  rows:150,
+	  initHandler: meltDownFunction
+	});
+
+
+	function meltDownFunction(){
+	  window.setTimeout(function(){meltDown.type("."); meltDown.newLine();}, 2000);
+	  window.setTimeout(function(){meltDown.type("> .."); meltDown.newLine();}, 2100);
+	  window.setTimeout(function(){meltDown.type("> ...");}, 2200);
+	  window.setTimeout(function(){meltDown.textColor = "red"; meltDown.type("> ERROR");}, 2200);
+	  window.setTimeout(function(){meltDown.newLine(); meltDown.type(".");}, 2500);
+	  window.setTimeout(function(){meltDown.newLine(); meltDown.type(".");}, 2800);
+	  window.setTimeout(function(){meltDown.newLine(); meltDown.type(".");}, 3300);
+	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3450);
+	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3500);
+	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3550);
+	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3600);
+	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3700);
+	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3800);
+	  window.setTimeout(function(){meltDown.newLine(); meltDown.type(">>>>>>>Access DENIED<<<<<<<"); meltDown.newLine();}, 3850);
+	  window.setTimeout(function(){meltDown.type(">>>>>>>GAME OVER<<<<<<<"); meltDown.newLine();}, 3900);
+	  window.setTimeout(function(){meltDown.type("<<<<<<<YOU LOOSE!>>>>>>>"); meltDown.textColor="red";}, 3900);
+	  window.setTimeout(function(){meltDown.reset();}, 10000);
+	  window.setTimeout(function(){meltDown.type("CRASH::FATAL"); meltDown.newLine();}, 10100);
+	  window.setTimeout(function(){meltDown.type("PLEASE REFRESH BROWSER");}, 10100);
+	}
+
+	function meltDownHandler(){
+	  var line_MD = this.lineBuffer;
+	}
+
+
 	var zeroTerm_A = new Terminal({
 	  handler: zeroTermHandler_A,
 	  greeting: "Thanks for checking out Terminal Velocity by Brad Neal. \n \nUnfortuneately we're having some technical difficulties right now. \nMy server crashed and took the game down with it, but all of the code is written and ready to go. \nIt's still possible for you to play, but you'll have to hack yourself together a basic mainframe first. \nI can show you how; type '#begin' and then press Enter to access my console remotely.",
@@ -60,7 +99,10 @@
 
 	function zeroTermHandler_A(){
 	  var line_0A = this.lineBuffer;
-	  if (line_0A != "#begin"){
+	  if (line_0A === "server.skip();"){
+	    this.close();
+	    frontEnd_G.open();
+	  }else if (line_0A != "#begin"){
 	    this.newLine();
 	    this.type("Command not recognized.");
 	  } else {
@@ -84,7 +126,7 @@
 
 	var zeroTerm_B = new Terminal({
 	  handler: zeroTermHandler_B,
-	  greeting: ">\n>\n>\n>\n>\n>\n>\n>\n>\nAwesome. With a litle luck we may actually be able to pull this off. \nMy server is programmed to my custom settings which are a little bit unconventional. \nI use '#open' to enter into my server-terminal. \nTry it now and let's see if we can get the ball rolling.",
+	  greeting: "##FrontEnd##\n>\n>\n>\n>\n>\n>\n>\n>\n>\nAwesome. With a litle luck we may actually be able to pull this off. \nMy server is programmed to my custom settings which are a little bit unconventional. \nI use '#open' to enter into my backend-terminal. \nTry it now and let's see if we can get the ball rolling.",
 	  textColor: "white",
 	  termDiv:'main',
 	  crsrBlockMode: false,
@@ -120,7 +162,7 @@
 
 	var zeroTerm_C = new Terminal({
 	  handler: zeroTermHandler_C,
-	  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\nExcellent. We're in. \nYou can tell when we're in the server-terminal because it uses green text. \nYou can always enter this server-terminal by using that same '#open' command. \nFrom here, we will be able to enter code which goes directly to my database. \nThe '#' symbol is a special symbol that I use to communicate with the server-terminal. \nLike I mentioned earlier, we may be able to pull this off, but it won't be easy. \nType '#continue' to learn about the next steps.",
+	  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\nExcellent. We're in. \nYou can tell when we're in the backend-terminal because it uses green text. \nYou can always enter this backend-terminal by using that same '#open' command. \nFrom here, we will be able to enter code which goes directly to my database. \nThe '#' symbol is a special symbol that I use to communicate with the backend-terminal. \nLike I mentioned earlier, we may be able to pull this off, but it won't be easy. \nType '#continue' to learn about the next steps.",
 	  termDiv:'main',
 	  crsrBlockMode: false,
 	  cols:220,
@@ -146,7 +188,7 @@
 
 	var zeroTerm_D = new Terminal({
 	  handler: zeroTermHandler_D,
-	  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\nBoom.\nIf you couldn't tell, we are still in the server-terminal. \nWe will always use '#open' to get into the server-terminal. \nFrom inside the code terminal we will be able to enter real JavaScript. \nThe JavaScript we enter will (hopefully) be enough to get this game up and running. \nOnce in this server-terminal, the compiler expects the user to enter pure JavaScript. \nTo get out of the server-terminal we will have to use another one of my custom commands; '#submit'. \n'#submit' tells the compiler that we have finished writing our JavaScript.\nThink of it like a period, marking the end of a sentence. \nWhen the server receives the '#submit' command, it will execute the JavaScript which came before the '#submit'.\n'#submit' is not JavaScipt, but is instead a custom command I created for personal server maintence.\nThe '#submit' command tells the server that we would like our code to be logged to the server. \nTry it now by typing '#submit' and pressing enter.",
+	  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\nBoom.\nIf you couldn't tell, we are still in the backend-terminal. \nWe will always use '#open' to get into the backend-terminal. \nFrom here we will be able to enter real JavaScript. \nThe JavaScript we enter will (hopefully) be enough to get this game up and running. \nOnce in this backend-terminal, the compiler expects the user to enter pure JavaScript. \nTo get out of the backend-terminal we will have to use another one of my custom commands; '#submit'. \n'#submit' tells the compiler that we have finished writing our JavaScript.\nThink of it like a period, marking the end of a sentence. \nWhen the server receives the '#submit' command, it will execute the JavaScript which came before the '#submit'.\n'#submit' is not JavaScipt, but is instead a custom command I created for personal server maintence.\nThe '#submit' command tells the server that we are finished writing and would like our code to be executed. \nTry it now by typing '#submit' and pressing enter.",
 	  termDiv:'main',
 	  crsrBlockMode: false,
 	  cols:220,
@@ -172,7 +214,7 @@
 
 	var zeroTerm_E = new Terminal({
 	  handler: zeroTermHandler_E,
-	  greeting: "Sweet.. We just might have a shot afterall.\nOkay, now lets run through the whole thing and see what it will really be like.\nEnter '#open' to get back into the server-terminal \nOnce inside, type 'server.status();' to see the server's status and then press enter. \nThe punctuation is important; 'server.status();'\nThats 'server' (dot) 'status' followed by a set of empty parenthesis and a semi-colon.\nThe quotes are not necessary.\nOnce you type that command press enter. On the next line, type '#submit' \nThe '#submit' command will tell the server we are done writing JavaScript.\nThis will run our status check on the server and exit the server-terminal. \nIt's risky to spend too much time in the server-terminal so try and be quick if you can. \nRemember, if things get messy, you can type 'reset' followed by enter to reset the current session.\n>\nTo recap:\n1. type '#open' here and press enter. Wait to be connected to the server-terminal.\n2. Once inside, type server.status(); and press enter.\n3. On the next line, type '#submit' and press enter.\n>\nOnce you are inside the server-terminal we will have no way of communicating until you '#submit'. \nHope to see you back here soon.",
+	  greeting: "##FrontEnd##\nSweet.. We just might have a shot afterall.\nOkay, now lets run through the whole thing and see what it will really be like.\nEnter '#open' to get back into the backend-terminal. \nOnce inside, type 'server.status();' and then press Enter.\nThis command tells the server we would like to know it's status. \nThe punctuation is important; 'server.status();'\nThats 'server' (dot) 'status' followed by a set of empty PARENTHESIS and a SEMI-COLON.\nThe quotes are not necessary.\nOnce you type that command press enter. On the next line, type '#submit' \nThe '#submit' command will tell the server we are done writing JavaScript.\nThis will run our status check on the server and display the results. \nIt's risky to spend too much time in the backend-terminal so try and be quick if you can. \nRemember, if things get messy, you can type 'reset' followed by enter to reset the current session.\n>\nTo recap:\n1. type '#open' here and press enter. Wait to be connected to the backend-terminal.\n2. Once inside, type server.status(); and press enter.\n3. On the next line, type '#submit' and press enter.\n>\nOnce you are inside the backend-terminal we will have no way of communicating until you '#submit'. \nHope to see you back here soon.",
 	  termDiv:'main',
 	  crsrBlockMode: false,
 	  cols:220,
@@ -232,9 +274,103 @@
 	  this.prompt();
 	}
 
+	var frontEnd_G = new Terminal({
+	  handler: handler_G,
+	  greeting: "##FrontEnd##\nWow! You made it! Great Job!\nDid you see how our server.status(); command worked?\nDon't forget that command, some of that information may come in handy in the future.\nYou've made a lot of progress and it would be a shame to loose it, so I'm going to let you in on a secret:\nIf anything happens and your computer crashes, reset your browser and reload this site.\nFrom there, you can use the command 'server.skip();' in the first window. \nWrite that command down on paper. It will take you back here.\n>\n>\nOkay, now that you know what you're doing its time to get to work on this game.\nType '#moveon' when you're ready to move on.",
+	  termDiv:'main',
+	  crsrBlockMode: false,
+	  cols:220,
+	  rows:150,
+	  textColor: "white"
+	});
+
+	function handler_G(){
+	  var line_G = this.lineBuffer;
+	  if (line_G == "reset") {
+	    this.reset();
+	  }else if (line_G == "#moveon") {
+	    this.close();
+	    front_H.open();
+	  }
+	  this.prompt();
+	}
+
+	var front_H = new Terminal({
+	  handler: handler_H,
+	  greeting: "##FrontEnd##\nIn order to play our game we're going to need to be able to see it.\nTo make room for the game's screen, were going to need to clear some space on this window.\nLet's go into the backend-terminal and run a 'this.resizeTerminal();' command. Note the Capital Letter. \nThat should do the trick.",
+	  termDiv:'main',
+	  crsrBlockMode: false,
+	  cols:220,
+	  rows:150,
+	  textColor: "white"
+	});
+
+
+	function handler_H(){
+	  var line_H = this.lineBuffer;
+	  if (line_H == "reset") {
+	    this.reset();
+	  }else if (line_H == "#open") {
+	    this.close();
+	    back_I.open();
+	  }
+	  this.prompt();
+	}
+
+
+	var back_I = new Terminal({
+	  handler: handler_I,
+	  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\n>\n",
+	  termDiv:'main',
+	  crsrBlockMode: false,
+	  cols:220,
+	  rows:150,
+	  textColor: "#7FFF00"
+	});
+
+	function handler_I(){
+	  var line_I = this.lineBuffer;
+	  var codeInjI = this.codeInjI || "";
+	  if (line_I == "reset") {
+	    this.reset();
+	  }else if (line_I == "#submit") {
+	    evaluate(codeInjI, "I");
+	    this.codeInjI = "";
+	  } else {
+	    this.codeInjI = codeInjI + line_I;
+	  }
+	  this.prompt();
+	}
+
+
+	var newTerm_A = new Terminal({
+	  handler: handlerNewA,
+	  greeting: "##FrontEnd##\nFinally, some breathing room. Much better!",
+	  termDiv:'second',
+	  crsrBlockMode: false,
+	  cols:100,
+	  rows:16,
+	  textColor: "white"
+	});
+
+
+	function handlerNewA(){
+	  var line_H = this.lineBuffer;
+	  if (line_H == "reset") {
+	    this.reset();
+	  }else if (line_H == "#open") {
+	    console.log("we doin work");
+	  }
+	  this.prompt();
+	}
+
 
 
 	zeroTerm_A.open();
+
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	var firstTerm_A = new Terminal({
 	  handler: firstTermHandler_A,
@@ -489,44 +625,62 @@
 	  this.prompt();
 	}
 
-	var meltDown = new Terminal({
-	  textColor: "white",
-	  handler: meltDownHandler,
-	  greeting: "/$ ERROR--SYSTEM_MELTDOWN! (v1.0.1.1) \n>\n>\n>\n",
-	  termDiv:'main',
-	  crsrBlockMode: false,
-	  cols:220,
-	  rows:150,
-	  initHandler: meltDownFunction
-	});
 
-
-	function meltDownFunction(){
-	  window.setTimeout(function(){meltDown.type("."); meltDown.newLine();}, 2000);
-	  window.setTimeout(function(){meltDown.type("> .."); meltDown.newLine();}, 2100);
-	  window.setTimeout(function(){meltDown.type("> ...");}, 2200);
-	  window.setTimeout(function(){meltDown.textColor = "red"; meltDown.type("> ERROR");}, 2200);
-	  window.setTimeout(function(){meltDown.newLine(); meltDown.type(".");}, 2500);
-	  window.setTimeout(function(){meltDown.newLine(); meltDown.type(".");}, 2800);
-	  window.setTimeout(function(){meltDown.newLine(); meltDown.type(".");}, 3300);
-	  window.setTimeout(function(){meltDown.newLine(); meltDown.type(">>>>>>>Access DENIED<<<<<<<");}, 3350);
-	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3450);
-	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3500);
-	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3550);
-	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3600);
-	  window.setTimeout(function(){meltDown.type(">>>>>>>GAME OVER<<<<<<<"); meltDown.newLine();}, 3600);
-	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3700);
-	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3800);
-	  window.setTimeout(function(){meltDown.type("<<<<<<<YOU LOOSE!>>>>>>>"); meltDown.newLine();}, 3600);
-	  window.setTimeout(function(){meltDown.close();}, 10000);
-	  window.setTimeout(function(){zeroTerm_A.open();}, 10000);
+	function showStatus(){
+	  window.setTimeout(function(){zeroTerm_F.type("."); zeroTerm_F.newLine();}, 2000);
+	  window.setTimeout(function(){zeroTerm_F.type("> .."); zeroTerm_F.newLine();}, 2100);
+	  window.setTimeout(function(){zeroTerm_F.type("> ..."); zeroTerm_F.newLine();}, 2200);
+	  window.setTimeout(function(){zeroTerm_F.type("> Initializing");}, 2200);
+	  window.setTimeout(function(){zeroTerm_F.type(".");}, 2500);
+	  window.setTimeout(function(){zeroTerm_F.type(".");}, 2800);
+	  window.setTimeout(function(){zeroTerm_F.type("."); zeroTerm_F.newLine();}, 3300);
+	  window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 4000);
+	  window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 4100);
+	  window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 4200);
+	  window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 4300);
+	  window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 4400);
+	  window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 4500);
+	  window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 4600);
+	  window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 4800);
+	  window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 4400);
+	  window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 4500);
+	  window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 4600);
+	  window.setTimeout(function(){zeroTerm_F.type(".");}, 4800);
+	  window.setTimeout(function(){zeroTerm_F.type(".");}, 5000);
+	  window.setTimeout(function(){zeroTerm_F.type("."); zeroTerm_F.newLine();}, 5350);
+	  window.setTimeout(function(){zeroTerm_F.type("ACCESS GRANTED");}, 5400);
+	  window.setTimeout(function(){zeroTerm_F.reset();}, 6000);
+	  window.setTimeout(function(){zeroTerm_F.type("::SERVER STATUS::"); zeroTerm_F.newLine();}, 6200);
+	  window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 6200);
+	  window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 6200);
+	  window.setTimeout(function(){zeroTerm_F.type("HASH: "); zeroTerm_F.type("3c1fbb300b506803d4bb"); zeroTerm_F.newLine();}, 6500);
+	  window.setTimeout(function(){zeroTerm_F.type("PORT: "); zeroTerm_F.type("3000"); zeroTerm_F.newLine();}, 6800);
+	  window.setTimeout(function(){zeroTerm_F.type("RACK: "); zeroTerm_F.type("(4.2.5.1)"); zeroTerm_F.newLine();}, 6900);
+	  window.setTimeout(function(){zeroTerm_F.type("PROCESS: "); zeroTerm_F.type("MONGOS_DB"); zeroTerm_F.newLine();}, 7000);
+	  window.setTimeout(function(){zeroTerm_F.type("PID: "); zeroTerm_F.type("4823"); zeroTerm_F.newLine();}, 7500);
+	  window.setTimeout(function(){zeroTerm_F.type("VERSION: "); zeroTerm_F.type("1.1.0.1"); zeroTerm_F.newLine();}, 7500);
+	  window.setTimeout(function(){zeroTerm_F.type("AdvisoryHostFQDN: "); zeroTerm_F.type("[3,54,24,197]"); zeroTerm_F.newLine();}, 8200);
+	  window.setTimeout(function(){zeroTerm_F.type("PASSWORD: "); zeroTerm_F.type("STRAWB3RRY"); zeroTerm_F.newLine();}, 8200);
+	  window.setTimeout(function(){zeroTerm_F.type("UPTIME_CHANNEL: "); zeroTerm_F.type("{}"); zeroTerm_F.newLine();}, 8500);
+	  window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 8500);
+	  window.setTimeout(function(){zeroTerm_F.type(".");}, 8510);
+	  window.setTimeout(function(){zeroTerm_F.type(".");}, 8800);
+	  window.setTimeout(function(){zeroTerm_F.type(".");}, 9200);
+	  window.setTimeout(function(){zeroTerm_F.type(".");}, 9200);
+	  window.setTimeout(function(){zeroTerm_F.type(".");}, 9200);
+	  window.setTimeout(function(){zeroTerm_F.close();}, 12000);
+	  window.setTimeout(function(){frontEnd_G.open();}, 12000);
 	}
-	function meltDownHandler(){
-	  var line_MD = this.lineBuffer;
-	}
 
+	function termResize(){
+	  back_I.close();
+	  $( "#main" ).remove();
+	  $( "#second" ).addClass( "second-level" );
+	  newTerm_A.open();
+	}
 
 	function evaluate(block, level){
+	  console.log("MELTDOWN", meltDown);
 	  console.log("BLOCK", block);
 	  var codeStr = block.replace(/ +?/g, '');
 	  if (level === 0){
@@ -534,26 +688,23 @@
 	      zeroTerm_F.close();
 	      meltDown.open();
 	    } else {
-	      window.setTimeout(function(){zeroTerm_F.type("."); zeroTerm_F.newLine();}, 2000);
-	      window.setTimeout(function(){zeroTerm_F.type("> .."); zeroTerm_F.newLine();}, 2100);
-	      window.setTimeout(function(){zeroTerm_F.type("> ...");}, 2200);
-	      window.setTimeout(function(){zeroTerm_F.type("> Initializing");}, 2200);
-	      window.setTimeout(function(){zeroTerm_F.type(".");}, 2500);
-	      window.setTimeout(function(){zeroTerm_F.type(".");}, 2800);
-	      window.setTimeout(function(){zeroTerm_F.type(".");}, 3300);
-	      window.setTimeout(function(){zeroTerm_F.newLine(); zeroTerm_F.type(">>>>>>>Access Granted<<<<<<<");}, 3350);
-	      window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 3450);
-	      window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 3500);
-	      window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 3550);
-	      window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 3600);
-	      window.setTimeout(function(){zeroTerm_F.type(">>>>>>>GAME OVER<<<<<<<"); zeroTerm_F.newLine();}, 3600);
-	      window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 3700);
-	      window.setTimeout(function(){zeroTerm_F.type(">"); zeroTerm_F.newLine();}, 3800);
-	      window.setTimeout(function(){zeroTerm_F.type("<<<<<<<YOU WIN!>>>>>>>"); zeroTerm_F.newLine();}, 3600);
-	      window.setTimeout(function(){zeroTerm_F.close();}, 15000);
-	      window.setTimeout(function(){zeroTerm_A.open();}, 15000);
-
-
+	      showStatus();
+	    }
+	  }
+	  if (level === "I"){
+	    if (codeStr != "this.resizeTerminal();"){
+	      console.log("made it in here");
+	      front_H.close();
+	      meltDown.open();
+	    } else {
+	      window.setTimeout(function(){back_I.type("."); back_I.newLine();}, 500);
+	      window.setTimeout(function(){back_I.type("> .."); back_I.newLine();}, 700);
+	      window.setTimeout(function(){back_I.type("> ..."); back_I.newLine();}, 1000);
+	      window.setTimeout(function(){back_I.type("> Initializing");}, 1300);
+	      window.setTimeout(function(){back_I.type(".");}, 2000);
+	      window.setTimeout(function(){back_I.type(".");}, 2700);
+	      window.setTimeout(function(){back_I.type(".");}, 3000);
+	      window.setTimeout(function(){termResize();}, 3400);
 	    }
 	  }
 	  if (level === 1) {
