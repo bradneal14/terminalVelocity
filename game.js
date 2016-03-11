@@ -299,7 +299,7 @@ function handler_I(){
 
 var newTerm_A = new Terminal({
   handler: handlerNewA,
-  greeting: "##FrontEnd##\nFinally, some breathing room. Much better!",
+  greeting: "##FrontEnd##\nFinally, some breathing room. Much better!\nNow run 'this.moveTerminalDown();' to put the terminal in a resonable place.",
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
@@ -318,6 +318,51 @@ function handlerNewA(){
   this.prompt();
 }
 
+var newTerm_B = new Terminal({
+  handler: handlerNewB,
+  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\n>\n",
+  termDiv:'main',
+  crsrBlockMode: false,
+  cols:220,
+  rows:150,
+  textColor: "#7FFF00"
+});
+
+function handlerNewB(){
+  var line_I = this.lineBuffer;
+  var codeInjI = this.codeInjI || "";
+  if (line_I == "reset") {
+    this.reset();
+  }else if (line_I == "#submit") {
+    evaluate(codeInjI, "newB");
+    this.codeInjI = "";
+  } else {
+    this.codeInjI = codeInjI + line_I;
+  }
+  this.prompt();
+}
+
+
+var newTerm_C = new Terminal({
+  handler: handlerNewC,
+  greeting: "##FrontEnd##\nMuch Better. Jeeze, I feel like a new terminal!",
+  termDiv:'second',
+  crsrBlockMode: false,
+  cols:100,
+  rows:16,
+  textColor: "white"
+});
+
+
+function handlerNewC(){
+  var line_H = this.lineBuffer;
+  if (line_H == "reset") {
+    this.reset();
+  }else if (line_H == "#open") {
+    console.log("we doin work");
+  }
+  this.prompt();
+}
 
 
 zeroTerm_A.open();
@@ -629,8 +674,13 @@ function showStatus(){
 function termResize(){
   back_I.close();
   $( "#main" ).remove();
-  $( "#second" ).addClass( "second-level" );
   newTerm_A.open();
+}
+
+function termReposition(){
+  newTerm_B.close();
+  $( "#second" ).addClass( "second-level" );
+  newTerm_C.open();
 }
 
 function evaluate(block, level){
@@ -659,6 +709,22 @@ function evaluate(block, level){
       window.setTimeout(function(){back_I.type(".");}, 2700);
       window.setTimeout(function(){back_I.type(".");}, 3000);
       window.setTimeout(function(){termResize();}, 3400);
+    }
+  }
+  if (level === "newB"){
+    if (codeStr != "this.moveTerminalDown();"){
+      console.log("made it in here");
+      newTerm_B.close();
+      meltDown.open();
+    } else {
+      window.setTimeout(function(){newTerm_B.type("."); newTerm_B.newLine();}, 500);
+      window.setTimeout(function(){newTerm_B.type("> .."); newTerm_B.newLine();}, 700);
+      window.setTimeout(function(){newTerm_B.type("> ..."); newTerm_B.newLine();}, 1000);
+      window.setTimeout(function(){newTerm_B.type("> Initializing");}, 1300);
+      window.setTimeout(function(){newTerm_B.type(".");}, 2000);
+      window.setTimeout(function(){newTerm_B.type(".");}, 2700);
+      window.setTimeout(function(){newTerm_B.type(".");}, 3000);
+      window.setTimeout(function(){termReposition();}, 3400);
     }
   }
   if (level === 1) {
