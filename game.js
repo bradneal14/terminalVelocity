@@ -313,7 +313,8 @@ function handlerNewA(){
   if (line_H == "reset") {
     this.reset();
   }else if (line_H == "#open") {
-    console.log("we doin work");
+    this.close();
+    newTerm_B.open();
   }
   this.prompt();
 }
@@ -321,10 +322,10 @@ function handlerNewA(){
 var newTerm_B = new Terminal({
   handler: handlerNewB,
   greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\n>\n",
-  termDiv:'main',
+  termDiv:'second',
   crsrBlockMode: false,
-  cols:220,
-  rows:150,
+  cols:100,
+  rows:16,
   textColor: "#7FFF00"
 });
 
@@ -701,14 +702,11 @@ function evaluate(block, level){
       front_H.close();
       meltDown.open();
     } else {
-      window.setTimeout(function(){back_I.type("."); back_I.newLine();}, 500);
-      window.setTimeout(function(){back_I.type("> .."); back_I.newLine();}, 700);
-      window.setTimeout(function(){back_I.type("> ..."); back_I.newLine();}, 1000);
-      window.setTimeout(function(){back_I.type("> Initializing");}, 1300);
+      window.setTimeout(function(){back_I.type("> Initializing");}, 700);
+      window.setTimeout(function(){back_I.type(".");}, 1300);
+      window.setTimeout(function(){back_I.type(".");}, 1800);
       window.setTimeout(function(){back_I.type(".");}, 2000);
-      window.setTimeout(function(){back_I.type(".");}, 2700);
-      window.setTimeout(function(){back_I.type(".");}, 3000);
-      window.setTimeout(function(){termResize();}, 3400);
+      window.setTimeout(function(){termResize();}, 3000);
     }
   }
   if (level === "newB"){
@@ -717,14 +715,12 @@ function evaluate(block, level){
       newTerm_B.close();
       meltDown.open();
     } else {
-      window.setTimeout(function(){newTerm_B.type("."); newTerm_B.newLine();}, 500);
-      window.setTimeout(function(){newTerm_B.type("> .."); newTerm_B.newLine();}, 700);
-      window.setTimeout(function(){newTerm_B.type("> ..."); newTerm_B.newLine();}, 1000);
-      window.setTimeout(function(){newTerm_B.type("> Initializing");}, 1300);
-      window.setTimeout(function(){newTerm_B.type(".");}, 2000);
-      window.setTimeout(function(){newTerm_B.type(".");}, 2700);
-      window.setTimeout(function(){newTerm_B.type(".");}, 3000);
-      window.setTimeout(function(){termReposition();}, 3400);
+      window.setTimeout(function(){newTerm_B.type("> Initializing");}, 700);
+      window.setTimeout(function(){newTerm_B.type(".");}, 1300);
+      window.setTimeout(function(){newTerm_B.type(".");}, 1800);
+      window.setTimeout(function(){newTerm_B.type(".");}, 2100);
+      window.setTimeout(function(){newTerm_B.type(".");}, 2300);
+      window.setTimeout(function(){termReposition();}, 3000);
     }
   }
   if (level === 1) {
