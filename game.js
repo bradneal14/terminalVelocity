@@ -412,7 +412,7 @@ function handlerNewC(){
 
 var newTerm_D = new Terminal({
   handler: handlerNewD,
-  greeting: "##FrontEnd##\n>\nThings are going to get more difficult. \nLet's start adding stuff to the page.\nMaybe a title is a good place to start: this.addGameTitle();\nYou know what to do.",
+  greeting: "##FrontEnd##\n>\nThings are going to get more difficult. \nLet's start adding stuff to the page.\nMaybe a background is a good place to start: this.addGameBackground();\nYou know what to do.",
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
@@ -525,7 +525,7 @@ function aaHandler0(){
     this.reset();
   }else if (line_H == "#continue") {
     this.close();
-    newTerm_D.open();
+    aaTerm1.open();
   }
   this.prompt();
 }
@@ -533,7 +533,7 @@ function aaHandler0(){
 
 var aaTerm0 = new Terminal({
   handler: aaHandler0,
-  greeting: "##FrontEnd##\n>\nNice Job!\nThe title looks great, don't you think?",
+  greeting: "##FrontEnd##\n>\nNice Job!\nIt looks great, don't you think?\n#continue",
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
@@ -541,7 +541,54 @@ var aaTerm0 = new Terminal({
   textColor: "white"
 });
 
+var aaTerm1 = new Terminal({
+  handler: aaHandler1,
+  greeting: "##FrontEnd##\n>\n>\nWhat game are we even trying to play?\nRun 'this.addGameTitle();' ",
+  termDiv:'second',
+  crsrBlockMode: false,
+  cols:100,
+  rows:20,
+  textColor: "white"
+});
 
+function aaHandler1(){
+  var line_H = this.lineBuffer;
+  if (line_H == "reset") {
+    this.reset();
+  }else if (line_H == "#open") {
+    this.close();
+    aaTerm1_B.open();
+  }
+  this.prompt();
+}
+
+
+
+
+var aaTerm1_B = new Terminal({
+  handler: aaTerm1_BHandler,
+  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\n>",
+  termDiv:'second',
+  crsrBlockMode: false,
+  cols:100,
+  rows:20,
+  textColor: "#7FFF00"
+});
+
+
+function aaTerm1_BHandler(){
+  var line_I = this.lineBuffer;
+  var codeInjI = this.codeInjI || "";
+  if (line_I == "reset") {
+    this.reset();
+  }else if (line_I == "#submit") {
+    evaluate(codeInjI, "newTitle");
+    this.codeInjI = "";
+  } else {
+    this.codeInjI = codeInjI + line_I;
+  }
+  this.prompt();
+}
 
 
 
@@ -947,10 +994,13 @@ function authAnimationApproved(){
   window.setTimeout(function(){passTermA.type(".");}, 500);
   window.setTimeout(function(){passTermA.type(".");}, 700);
   window.setTimeout(function(){passTermA.type(".");}, 900);
-  window.setTimeout(function(){passTermA.type("."); passTermA.newLine();}, 1000);
-  window.setTimeout(function(){addTitle();}, 1100);
-  window.setTimeout(function(){passTermA.close();}, 1100);
-  window.setTimeout(function(){aaTerm0.open();}, 1100);
+  window.setTimeout(function(){passTermA.type("."); passTermA.newLine();}, 1200);
+  window.setTimeout(function(){passTermA.type(".");}, 1300);
+  window.setTimeout(function(){passTermA.type(".");}, 1400);
+  window.setTimeout(function(){passTermA.type(".");}, 1500);
+  window.setTimeout(function(){passTermA.close();}, 2200);
+  window.setTimeout(function(){aaTerm0.open();}, 2200);
+  window.setTimeout(function(){addBG();}, 1200);
 }
 
 
@@ -967,8 +1017,12 @@ function authAnimationDenied(){
   window.setTimeout(function(){newTerm_D.open();}, 2500);
 }
 
+function addBG(){
+  $( "#whole-page" ).addClass("background");
+}
+
 function addTitle(){
-  $( "#title" ).removeClass("hidden");
+  $("#title").removeClass("hidden");
 }
 
 function evaluate(block, level){
@@ -982,6 +1036,14 @@ function evaluate(block, level){
     } else {
       showStatus();
       window.setTimeout(function(){frontEnd_G.open();}, 12000);
+    }
+  }
+  if (level === "newTitle"){
+    if (codeStr === "this.addGameTitle();"){
+      addTitle();
+    } else {
+      aaTerm1_B.close();
+      smallMeltdown.open();
     }
   }
   if (level === "user"){
@@ -1022,7 +1084,7 @@ function evaluate(block, level){
     if (codeStr === "server.status();"){
       showStatusAgain();
       window.setTimeout(function(){newTerm_D.open();}, 12000);
-    } else if (codeStr === "this.addGameTitle();") {
+    } else if (codeStr === "this.addGameBackground();") {
       window.setTimeout(function(){newBackE.type("> Initializing");}, 700);
       window.setTimeout(function(){newBackE.type(".");}, 1300);
       window.setTimeout(function(){newBackE.type(".");}, 1800);

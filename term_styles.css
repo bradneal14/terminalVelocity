@@ -11,7 +11,7 @@
 }
 
 .title-image{
-	height: 300px;
+	height: 200px;
 	margin-left: 25%;
 }
 
@@ -23,6 +23,15 @@
 	background-color: blue;
 }
 
+
+.background{
+	background-image: url(https://images3.pixlis.com/background-image-plaid-checkered-seamless-tileable-neon-pink-dodger-blue-235aa5.png);
+	background-size: cover;
+	background-position: center;
+	height: 100%;
+	position: absolute;
+	width: 100%;
+}
 
 .first-level{
 	left: 0px !important;
