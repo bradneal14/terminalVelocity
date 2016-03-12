@@ -46,7 +46,7 @@
 
 	var Terminal = __webpack_require__(1);
 	var $ = __webpack_require__(2);
-
+	var hash = __webpack_require__(3);
 
 	var meltDown = new Terminal({
 	  textColor: "white",
@@ -87,6 +87,45 @@
 	}
 
 
+	var smallMeltdown = new Terminal({
+	  textColor: "white",
+	  handler: smallMeltdownHandler,
+	  greeting: "/$ ERROR--SYSTEM_MELTDOWN! (v1.0.1.1) \n>\n>\n>\n",
+	  termDiv:'second',
+	  crsrBlockMode: false,
+	  cols:100,
+	  rows:20,
+	  initHandler: smallMeltdownFunction
+	});
+
+
+	function smallMeltdownFunction(){
+	  window.setTimeout(function(){smallMeltdown.type("."); smallMeltdown.newLine();}, 2000);
+	  window.setTimeout(function(){smallMeltdown.type("> .."); smallMeltdown.newLine();}, 2100);
+	  window.setTimeout(function(){smallMeltdown.type("> ...");}, 2200);
+	  window.setTimeout(function(){smallMeltdown.textColor = "red"; smallMeltdown.type("> ERROR");}, 2200);
+	  window.setTimeout(function(){smallMeltdown.newLine(); smallMeltdown.type(".");}, 2500);
+	  window.setTimeout(function(){smallMeltdown.newLine(); smallMeltdown.type(".");}, 2800);
+	  window.setTimeout(function(){smallMeltdown.newLine(); smallMeltdown.type(".");}, 3300);
+	  window.setTimeout(function(){smallMeltdown.type(">"); smallMeltdown.newLine();}, 3450);
+	  window.setTimeout(function(){smallMeltdown.type(">"); smallMeltdown.newLine();}, 3500);
+	  window.setTimeout(function(){smallMeltdown.type(">"); smallMeltdown.newLine();}, 3550);
+	  window.setTimeout(function(){smallMeltdown.type(">"); smallMeltdown.newLine();}, 3600);
+	  window.setTimeout(function(){smallMeltdown.type(">"); smallMeltdown.newLine();}, 3700);
+	  window.setTimeout(function(){smallMeltdown.type(">"); smallMeltdown.newLine();}, 3800);
+	  window.setTimeout(function(){smallMeltdown.newLine(); smallMeltdown.type(">>>>>>>Access DENIED<<<<<<<"); smallMeltdown.newLine();}, 3850);
+	  window.setTimeout(function(){smallMeltdown.type(">>>>>>>GAME OVER<<<<<<<"); smallMeltdown.newLine();}, 3900);
+	  window.setTimeout(function(){smallMeltdown.type("<<<<<<<YOU LOOSE!>>>>>>>"); smallMeltdown.textColor="red";}, 3900);
+	  window.setTimeout(function(){smallMeltdown.reset();}, 10000);
+	  window.setTimeout(function(){smallMeltdown.type("CRASH::FATAL"); smallMeltdown.newLine();}, 10100);
+	  window.setTimeout(function(){smallMeltdown.type("PLEASE REFRESH BROWSER");}, 10100);
+	}
+
+	function smallMeltdownHandler(){
+	  var line_MD = this.lineBuffer;
+	}
+
+
 	var zeroTerm_A = new Terminal({
 	  handler: zeroTermHandler_A,
 	  greeting: "Thanks for checking out Terminal Velocity by Brad Neal. \n \nUnfortuneately we're having some technical difficulties right now. \nMy server crashed and took the game down with it, but all of the code is written and ready to go. \nIt's still possible for you to play, but you'll have to hack yourself together a basic mainframe first. \nI can show you how; type '#begin' and then press Enter to access my console remotely.",
@@ -102,7 +141,12 @@
 	  if (line_0A === "server.skip();"){
 	    this.close();
 	    frontEnd_G.open();
-	  }else if (line_0A != "#begin"){
+	  } else if (line_0A === "reposition.skip();"){
+	    this.close();
+	    termResize();
+	    termReposition();
+	    newTerm_C.open();
+	  } else if (line_0A != "#begin"){
 	    this.newLine();
 	    this.type("Command not recognized.");
 	  } else {
@@ -345,11 +389,11 @@
 
 	var newTerm_A = new Terminal({
 	  handler: handlerNewA,
-	  greeting: "##FrontEnd##\nFinally, some breathing room. Much better!\nNow run 'this.moveTerminalDown();' to put the terminal in a resonable place.",
+	  greeting: "##FrontEnd##\n>\nFinally, some breathing room. Much better!\nSo far we havent added anything to the page, we've just made our terminal smaller. \nNow run 'this.repositionTerminal();' to put the terminal in a resonable place.",
 	  termDiv:'second',
 	  crsrBlockMode: false,
 	  cols:100,
-	  rows:16,
+	  rows:20,
 	  textColor: "white"
 	});
 
@@ -371,7 +415,7 @@
 	  termDiv:'second',
 	  crsrBlockMode: false,
 	  cols:100,
-	  rows:16,
+	  rows:20,
 	  textColor: "#7FFF00"
 	});
 
@@ -392,11 +436,11 @@
 
 	var newTerm_C = new Terminal({
 	  handler: handlerNewC,
-	  greeting: "##FrontEnd##\nMuch Better. Jeeze, I feel like a new terminal!",
+	  greeting: "##FrontEnd##\n>\nMuch Better. Jeeze, I feel like a new terminal! \nYou can now use 'reposition.skip();'to get back here from the #begin page. Write it down.\n'#continue' to continue",
 	  termDiv:'second',
 	  crsrBlockMode: false,
 	  cols:100,
-	  rows:16,
+	  rows:20,
 	  textColor: "white"
 	});
 
@@ -405,11 +449,147 @@
 	  var line_H = this.lineBuffer;
 	  if (line_H == "reset") {
 	    this.reset();
-	  }else if (line_H == "#open") {
-	    console.log("we doin work");
+	  }else if (line_H == "#continue") {
+	    this.close();
+	    newTerm_D.open();
 	  }
 	  this.prompt();
 	}
+
+	var newTerm_D = new Terminal({
+	  handler: handlerNewD,
+	  greeting: "##FrontEnd##\n>\nThings are going to get more difficult. \nLet's start adding stuff to the page.\nMaybe a title is a good place to start: this.addGameTitle();\nYou know what to do.",
+	  termDiv:'second',
+	  crsrBlockMode: false,
+	  cols:100,
+	  rows:20,
+	  textColor: "white"
+	});
+
+
+	function handlerNewD(){
+	  var line_H = this.lineBuffer;
+	  if (line_H == "reset") {
+	    this.reset();
+	  } else if (line_H == "#help") {
+	    this.newLine();
+	    this.type("Ah yes, I should have mentioned the Authentication..");
+	    this.newLine();
+	    this.type("For information on the username, use '#username'.");
+	    this.newLine();
+	    this.type("The password is part of the server's status, run 'server.status();' again on the backend.");
+	    this.newLine();
+	    this.type("Pay Attention.");
+	  } else if (line_H == "#username") {
+	    this.newLine();
+	    this.type("This is probably going to take some googling.");
+	    this.newLine();
+	    this.type("You're going to need to open your developer's console.");
+	    this.newLine();
+	    this.type("In the developer's console, run the command 'getUsername()', that should do the trick.");
+	  }else if (line_H == "#open") {
+	    this.close();
+	    newBackE.open();
+	  }
+	  this.prompt();
+	}
+
+
+	var newBackE = new Terminal({
+	  handler: handlerNewE,
+	  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\n>\n",
+	  termDiv:'second',
+	  crsrBlockMode: false,
+	  cols:100,
+	  rows:20,
+	  textColor: "#7FFF00"
+	});
+
+
+	var userTerm = new Terminal({
+	  handler: userHandler,
+	  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\n>",
+	  termDiv:'second',
+	  crsrBlockMode: false,
+	  cols:100,
+	  rows:20,
+	  textColor: "#7FFF00"
+	});
+
+	function userHandler(){
+	  var line_I = this.lineBuffer;
+	  evaluate(line_I, "user");
+	}
+
+	var passTerm = new Terminal({
+	  handler: handlerNewE,
+	  greeting: "",
+	  termDiv:'second',
+	  crsrBlockMode: false,
+	  cols:100,
+	  rows:20,
+	  textColor: "#7FFF00"
+	});
+
+	function passHandler(){
+	  var line = this.lineBuffer;
+	  evaluate(line, "pass");
+	}
+
+	function handlerNewE(){
+	  var line_I = this.lineBuffer;
+	  var codeInjI = this.codeInjI || "";
+	  if (line_I == "reset") {
+	    this.reset();
+	  }else if (line_I == "#submit") {
+	    evaluate(codeInjI, "newE");
+	    this.codeInjI = "";
+	  } else {
+	    this.codeInjI = codeInjI + line_I;
+	  }
+	  this.prompt();
+	}
+
+	var passTermA = new Terminal({
+	  handler: passHandlerA,
+	  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\n>",
+	  termDiv:'second',
+	  crsrBlockMode: false,
+	  cols:100,
+	  rows:20,
+	  textColor: "#7FFF00"
+	});
+
+	function passHandlerA(){
+	  var line_I = this.lineBuffer;
+	  evaluate(line_I, "pass");
+	}
+
+	function aaHandler0(){
+	  var line_H = this.lineBuffer;
+	  if (line_H == "reset") {
+	    this.reset();
+	  }else if (line_H == "#continue") {
+	    this.close();
+	    newTerm_D.open();
+	  }
+	  this.prompt();
+	}
+
+
+	var aaTerm0 = new Terminal({
+	  handler: aaHandler0,
+	  greeting: "##FrontEnd##\n>\nNice Job!\nThe title looks great, don't you think?",
+	  termDiv:'second',
+	  crsrBlockMode: false,
+	  cols:100,
+	  rows:20,
+	  textColor: "white"
+	});
+
+
+
+
 
 
 	zeroTerm_A.open();
@@ -715,7 +895,52 @@
 	  window.setTimeout(function(){zeroTerm_F.type(".");}, 9200);
 	  window.setTimeout(function(){zeroTerm_F.type(".");}, 9200);
 	  window.setTimeout(function(){zeroTerm_F.close();}, 12000);
-	  window.setTimeout(function(){frontEnd_G.open();}, 12000);
+	}
+
+
+	function showStatusAgain(){
+	  window.setTimeout(function(){newBackE.type("."); newBackE.newLine();}, 2000);
+	  window.setTimeout(function(){newBackE.type("> .."); newBackE.newLine();}, 2100);
+	  window.setTimeout(function(){newBackE.type("> ..."); newBackE.newLine();}, 2200);
+	  window.setTimeout(function(){newBackE.type("> Initializing");}, 2200);
+	  window.setTimeout(function(){newBackE.type(".");}, 2500);
+	  window.setTimeout(function(){newBackE.type(".");}, 2800);
+	  window.setTimeout(function(){newBackE.type("."); newBackE.newLine();}, 3300);
+	  window.setTimeout(function(){newBackE.type(">"); newBackE.newLine();}, 4000);
+	  window.setTimeout(function(){newBackE.type(">"); newBackE.newLine();}, 4100);
+	  window.setTimeout(function(){newBackE.type(">"); newBackE.newLine();}, 4200);
+	  window.setTimeout(function(){newBackE.type(">"); newBackE.newLine();}, 4300);
+	  window.setTimeout(function(){newBackE.type(">"); newBackE.newLine();}, 4400);
+	  window.setTimeout(function(){newBackE.type(">"); newBackE.newLine();}, 4500);
+	  window.setTimeout(function(){newBackE.type(">"); newBackE.newLine();}, 4600);
+	  window.setTimeout(function(){newBackE.type(">"); newBackE.newLine();}, 4800);
+	  window.setTimeout(function(){newBackE.type(">"); newBackE.newLine();}, 4400);
+	  window.setTimeout(function(){newBackE.type(">"); newBackE.newLine();}, 4500);
+	  window.setTimeout(function(){newBackE.type(">"); newBackE.newLine();}, 4600);
+	  window.setTimeout(function(){newBackE.type(".");}, 4800);
+	  window.setTimeout(function(){newBackE.type(".");}, 5000);
+	  window.setTimeout(function(){newBackE.type("."); newBackE.newLine();}, 5350);
+	  window.setTimeout(function(){newBackE.type("ACCESS GRANTED");}, 5400);
+	  window.setTimeout(function(){newBackE.reset();}, 6000);
+	  window.setTimeout(function(){newBackE.type("::SERVER STATUS::"); newBackE.newLine();}, 6200);
+	  window.setTimeout(function(){newBackE.type(">"); newBackE.newLine();}, 6200);
+	  window.setTimeout(function(){newBackE.type(">"); newBackE.newLine();}, 6200);
+	  window.setTimeout(function(){newBackE.type("HASH: "); newBackE.type("3c1fbb300b506803d4bb"); newBackE.newLine();}, 6500);
+	  window.setTimeout(function(){newBackE.type("PORT: "); newBackE.type("3000"); newBackE.newLine();}, 6800);
+	  window.setTimeout(function(){newBackE.type("RACK: "); newBackE.type("(4.2.5.1)"); newBackE.newLine();}, 6900);
+	  window.setTimeout(function(){newBackE.type("PROCESS: "); newBackE.type("MONGOS_DB"); newBackE.newLine();}, 7000);
+	  window.setTimeout(function(){newBackE.type("PID: "); newBackE.type("4823"); newBackE.newLine();}, 7500);
+	  window.setTimeout(function(){newBackE.type("VERSION: "); newBackE.type("1.1.0.1"); newBackE.newLine();}, 7500);
+	  window.setTimeout(function(){newBackE.type("AdvisoryHostFQDN: "); newBackE.type("[3,54,24,197]"); newBackE.newLine();}, 8200);
+	  window.setTimeout(function(){newBackE.type("PASSWORD: "); newBackE.type("STRAWB3RRY"); newBackE.newLine();}, 8200);
+	  window.setTimeout(function(){newBackE.type("UPTIME_CHANNEL: "); newBackE.type("{}"); newBackE.newLine();}, 8500);
+	  window.setTimeout(function(){newBackE.type(">"); newBackE.newLine();}, 8500);
+	  window.setTimeout(function(){newBackE.type(".");}, 8510);
+	  window.setTimeout(function(){newBackE.type(".");}, 8800);
+	  window.setTimeout(function(){newBackE.type(".");}, 9200);
+	  window.setTimeout(function(){newBackE.type(".");}, 9200);
+	  window.setTimeout(function(){newBackE.type(".");}, 9200);
+	  window.setTimeout(function(){newBackE.close();}, 12000);
 	}
 
 	function termResize(){
@@ -730,6 +955,68 @@
 	  newTerm_C.open();
 	}
 
+	function sendCred(str, field){
+	  if (!window.credentials){
+	    window.credentials = {user: null, pass: null};
+	  }
+	  switch(field){
+	    case "user":
+	      window.credentials["user"] = str.slice(9);
+	      userTerm.close();
+	      passTermA.open();
+	      passTermA.type("password: ");
+	      break;
+	    case "pass":
+	      window.credentials["pass"] = str.slice(9);
+	      var creds = window.credentials;
+	      authCheck(creds);
+	      break;
+	  }
+	}
+
+	function authCheck(creds){
+	  var userHash = hash.sha(creds.user);
+	  var passHash = hash.sha(creds.pass);
+	  //nice try but I hashed my shiz. Happy guessing
+	  if (userHash === "c36dd7f39139ccbe019ac527f0d8900f90d0e5de" && passHash === "b13b8e49cfd4d2c0fff7686d3de8f776db41926c"){
+	    console.log("swimmingly");
+	    authAnimationApproved();
+	  } else {
+	    authAnimationDenied();
+	  }
+	}
+
+	function authAnimationApproved(){
+	  passTermA.newLine();
+	  passTermA.type(">");
+	  window.setTimeout(function(){passTermA.newLine(); passTermA.type("Checking Authorization");}, 400);
+	  window.setTimeout(function(){passTermA.type(".");}, 500);
+	  window.setTimeout(function(){passTermA.type(".");}, 700);
+	  window.setTimeout(function(){passTermA.type(".");}, 900);
+	  window.setTimeout(function(){passTermA.type("."); passTermA.newLine();}, 1000);
+	  window.setTimeout(function(){addTitle();}, 1100);
+	  window.setTimeout(function(){passTermA.close();}, 1100);
+	  window.setTimeout(function(){aaTerm0.open();}, 1100);
+	}
+
+
+	function authAnimationDenied(){
+	  passTermA.newLine();
+	  passTermA.type(">");
+	  window.setTimeout(function(){passTermA.newLine(); passTermA.type("Checking Authorization");}, 400);
+	  window.setTimeout(function(){passTermA.type(".");}, 500);
+	  window.setTimeout(function(){passTermA.type(".");}, 700);
+	  window.setTimeout(function(){passTermA.type(".");}, 900);
+	  window.setTimeout(function(){passTermA.type("."); passTermA.newLine();}, 1000);
+	  window.setTimeout(function(){passTermA.type("ACCESS DENIED - use '#help' for help");}, 1000);
+	  window.setTimeout(function(){passTermA.close();}, 2500);
+	  window.setTimeout(function(){newTerm_D.open();}, 2500);
+	}
+
+	function addTitle(){
+	  $( "#title" ).removeClass("hidden");
+	}
+
 	function evaluate(block, level){
 	  console.log("MELTDOWN", meltDown);
 	  console.log("BLOCK", block);
@@ -740,7 +1027,15 @@
 	      meltDown.open();
 	    } else {
 	      showStatus();
+	      window.setTimeout(function(){frontEnd_G.open();}, 12000);
 	    }
+	  }
+	  if (level === "user"){
+	    console.log("were sending this to send cred", codeStr);
+	    sendCred(codeStr, "user");
+	    }
+	  if (level === "pass"){
+	    sendCred(codeStr, "pass");
 	  }
 	  if (level === "I"){
 	    if (codeStr != "this.resizeTerminal();"){
@@ -756,10 +1051,10 @@
 	    }
 	  }
 	  if (level === "newB"){
-	    if (codeStr != "this.moveTerminalDown();"){
+	    if (codeStr != "this.repositionTerminal();"){
 	      console.log("made it in here");
 	      newTerm_B.close();
-	      meltDown.open();
+	      smallMeltdown.open();
 	    } else {
 	      window.setTimeout(function(){newTerm_B.type("> Initializing");}, 700);
 	      window.setTimeout(function(){newTerm_B.type(".");}, 1300);
@@ -767,6 +1062,24 @@
 	      window.setTimeout(function(){newTerm_B.type(".");}, 2100);
 	      window.setTimeout(function(){newTerm_B.type(".");}, 2300);
 	      window.setTimeout(function(){termReposition();}, 3000);
+	    }
+	  }
+	  if (level === "newE"){
+	    if (codeStr === "server.status();"){
+	      showStatusAgain();
+	      window.setTimeout(function(){newTerm_D.open();}, 12000);
+	    } else if (codeStr === "this.addGameTitle();") {
+	      window.setTimeout(function(){newBackE.type("> Initializing");}, 700);
+	      window.setTimeout(function(){newBackE.type(".");}, 1300);
+	      window.setTimeout(function(){newBackE.type(".");}, 1800);
+	      window.setTimeout(function(){newBackE.type(".");}, 2100);
+	      window.setTimeout(function(){newBackE.type("."); newBackE.newLine();}, 2300);
+	      window.setTimeout(function(){newBackE.close();}, 3000);
+	      window.setTimeout(function(){userTerm.open();}, 3000);
+	      window.setTimeout(function(){userTerm.type("username: ");}, 3000);
+	    } else {
+	      newBackE.close();
+	      smallMeltdown.open();
 	    }
 	  }
 	  if (level === 1) {
@@ -884,6 +1197,7 @@
 	  }
 	  this.prompt();
 	}
+
 
 	window.Terminal = Terminal;
 	window.jQuery = $;
@@ -14157,6 +14471,401 @@
 
 	return jQuery;
 	}));
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	var hashexp = {
+	  sha: function(msg) {
+
+
+	    function rotate_left(n,s) {
+
+
+	      var t4 = ( n<<s ) | (n>>>(32-s));
+
+
+	      return t4;
+
+
+	    };
+
+
+
+
+	    function lsb_hex(val) {
+
+
+	      var str="";
+
+
+	      var i;
+
+
+	      var vh;
+
+
+	      var vl;
+
+
+
+
+	      for( i=0; i<=6; i+=2 ) {
+
+
+	        vh = (val>>>(i*4+4))&0x0f;
+
+
+	        vl = (val>>>(i*4))&0x0f;
+
+
+	        str += vh.toString(16) + vl.toString(16);
+
+
+	      }
+
+
+	      return str;
+
+
+	    };
+
+
+
+
+	    function cvt_hex(val) {
+
+
+	      var str="";
+
+
+	      var i;
+
+
+	      var v;
+
+
+
+
+	      for( i=7; i>=0; i-- ) {
+
+
+	        v = (val>>>(i*4))&0x0f;
+
+
+	        str += v.toString(16);
+
+
+	      }
+
+
+	      return str;
+
+
+	    };
+
+
+
+
+
+
+	    function Utf8Encode(string) {
+
+
+	      string = string.replace(/\r\n/g,"\n");
+
+
+	      var utftext = "";
+
+
+
+
+	      for (var n = 0; n < string.length; n++) {
+
+
+
+
+	        var c = string.charCodeAt(n);
+
+
+
+
+	        if (c < 128) {
+
+
+	          utftext += String.fromCharCode(c);
+
+
+	        }
+
+
+	        else if((c > 127) && (c < 2048)) {
+
+
+	          utftext += String.fromCharCode((c >> 6) | 192);
+
+
+	          utftext += String.fromCharCode((c & 63) | 128);
+
+
+	        }
+
+
+	        else {
+
+
+	          utftext += String.fromCharCode((c >> 12) | 224);
+
+
+	          utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+
+
+	          utftext += String.fromCharCode((c & 63) | 128);
+
+
+	        }
+
+
+
+
+	      }
+
+
+
+
+	      return utftext;
+
+
+	    };
+
+
+
+
+	    var blockstart;
+
+
+	    var i, j;
+
+
+	    var W = new Array(80);
+
+
+	    var H0 = 0x67452301;
+
+
+	    var H1 = 0xEFCDAB89;
+
+
+	    var H2 = 0x98BADCFE;
+
+
+	    var H3 = 0x10325476;
+
+
+	    var H4 = 0xC3D2E1F0;
+
+
+	    var A, B, C, D, E;
+
+
+	    var temp;
+
+
+
+
+	    msg = Utf8Encode(msg);
+
+
+
+
+	    var msg_len = msg.length;
+
+
+
+
+	    var word_array = new Array();
+
+
+	    for( i=0; i<msg_len-3; i+=4 ) {
+
+
+	      j = msg.charCodeAt(i)<<24 | msg.charCodeAt(i+1)<<16 |
+
+
+	      msg.charCodeAt(i+2)<<8 | msg.charCodeAt(i+3);
+
+
+	      word_array.push( j );
+
+
+	    }
+
+
+
+
+	    switch( msg_len % 4 ) {
+
+
+	      case 0:
+
+
+	      i = 0x080000000;
+
+
+	      break;
+
+
+	      case 1:
+
+
+	      i = msg.charCodeAt(msg_len-1)<<24 | 0x0800000;
+
+
+	      break;
+
+
+
+
+	      case 2:
+
+
+	      i = msg.charCodeAt(msg_len-2)<<24 | msg.charCodeAt(msg_len-1)<<16 | 0x08000;
+
+
+	      break;
+
+
+
+
+	      case 3:
+
+
+	      i = msg.charCodeAt(msg_len-3)<<24 | msg.charCodeAt(msg_len-2)<<16 | msg.charCodeAt(msg_len-1)<<8    | 0x80;
+
+
+	      break;
+
+
+	    }
+
+
+
+
+	    word_array.push( i );
+
+
+
+
+	    while( (word_array.length % 16) != 14 ) word_array.push( 0 );
+
+
+
+
+	    word_array.push( msg_len>>>29 );
+
+
+	    word_array.push( (msg_len<<3)&0x0ffffffff );
+
+
+
+
+
+
+	    for ( blockstart=0; blockstart<word_array.length; blockstart+=16 ) {
+
+
+
+
+	      for( i=0; i<16; i++ ) W[i] = word_array[blockstart+i];
+
+
+	      for( i=16; i<=79; i++ ) W[i] = rotate_left(W[i-3] ^ W[i-8] ^ W[i-14] ^ W[i-16], 1);
+
+
+
+
+	      A = H0;
+
+
+	      B = H1;
+
+
+	      C = H2;
+
+
+	      D = H3;
+
+
+	      E = H4;
+
+
+
+
+	      for( i= 0; i<=19; i++ ) {
+
+
+	        temp = (rotate_left(A,5) + ((B&C) | (~B&D)) + E + W[i] + 0x5A827999) & 0x0ffffffff;
+
+
+	        E = D;
+
+
+	        D = C;
+
+
+	        C = rotate_left(B,30);
+	        B = A;
+	        A = temp;
+	      }
+	      for( i=20; i<=39; i++ ) {
+	        temp = (rotate_left(A,5) + (B ^ C ^ D) + E + W[i] + 0x6ED9EBA1) & 0x0ffffffff;
+	        E = D;
+	        D = C;
+	        C = rotate_left(B,30);
+	        B = A;
+	        A = temp;
+	      }
+	      for( i=40; i<=59; i++ ) {
+	        temp = (rotate_left(A,5) + ((B&C) | (B&D) | (C&D)) + E + W[i] + 0x8F1BBCDC) & 0x0ffffffff;
+	        E = D;
+	        D = C;
+	        C = rotate_left(B,30);
+	        B = A;
+	        A = temp;
+	      }
+	      for( i=60; i<=79; i++ ) {
+	        temp = (rotate_left(A,5) + (B ^ C ^ D) + E + W[i] + 0xCA62C1D6) & 0x0ffffffff;
+	        E = D;
+	        D = C;
+	        C = rotate_left(B,30);
+	        B = A;
+	        A = temp;
+	      }
+	      H0 = (H0 + A) & 0x0ffffffff;
+	      H1 = (H1 + B) & 0x0ffffffff;
+	      H2 = (H2 + C) & 0x0ffffffff;
+	      H3 = (H3 + D) & 0x0ffffffff;
+	      H4 = (H4 + E) & 0x0ffffffff;
+
+	    }
+
+
+
+
+	    var temp = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4);
+
+	    return temp.toLowerCase();
+
+
+
+	  }
+
+	};
+
+	module.exports = hashexp;
+	window.getUsername = "Arthur.Digby.Sellers";
 
 
 /***/ }

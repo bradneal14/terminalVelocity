@@ -10,6 +10,10 @@
 	background: #7FFF00;
 }
 
+.title-image{
+	height: 300px;
+	margin-left: 25%;
+}
 
 .rules {
 	float: right;
@@ -32,8 +36,9 @@
 }
 
 .second-level{
-	margin-top: 37%;
+	margin-top: 370px;
 	margin-left: 10%;
+	position: absolute;
 }
 
 .full{
