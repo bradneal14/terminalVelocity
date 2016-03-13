@@ -385,5 +385,10 @@ var hashexp = {
 
 };
 
+
+var getUsername = function(){
+  console.log("Arthur.Digby.Sellers");
+};
+
 module.exports = hashexp;
-window.getUsername = "Arthur.Digby.Sellers";
+window.getUsername = getUsername;

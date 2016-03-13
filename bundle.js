@@ -75,11 +75,9 @@
 	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3700);
 	  window.setTimeout(function(){meltDown.type(">"); meltDown.newLine();}, 3800);
 	  window.setTimeout(function(){meltDown.newLine(); meltDown.type(">>>>>>>Access DENIED<<<<<<<"); meltDown.newLine();}, 3850);
-	  window.setTimeout(function(){meltDown.type(">>>>>>>GAME OVER<<<<<<<"); meltDown.newLine();}, 3900);
-	  window.setTimeout(function(){meltDown.type("<<<<<<<YOU LOOSE!>>>>>>>"); meltDown.textColor="red";}, 3900);
-	  window.setTimeout(function(){meltDown.reset();}, 10000);
-	  window.setTimeout(function(){meltDown.type("CRASH::FATAL"); meltDown.newLine();}, 10100);
-	  window.setTimeout(function(){meltDown.type("PLEASE REFRESH BROWSER");}, 10100);
+	  window.setTimeout(function(){meltDown.reset();}, 4000);
+	  window.setTimeout(function(){meltDown.type("CRASH::FATAL"); meltDown.newLine();}, 4400);
+	  window.setTimeout(function(){meltDown.type("PLEASE REFRESH BROWSER");}, 4650);
 	}
 
 	function meltDownHandler(){
@@ -114,11 +112,9 @@
 	  window.setTimeout(function(){smallMeltdown.type(">"); smallMeltdown.newLine();}, 3700);
 	  window.setTimeout(function(){smallMeltdown.type(">"); smallMeltdown.newLine();}, 3800);
 	  window.setTimeout(function(){smallMeltdown.newLine(); smallMeltdown.type(">>>>>>>Access DENIED<<<<<<<"); smallMeltdown.newLine();}, 3850);
-	  window.setTimeout(function(){smallMeltdown.type(">>>>>>>GAME OVER<<<<<<<"); smallMeltdown.newLine();}, 3900);
-	  window.setTimeout(function(){smallMeltdown.type("<<<<<<<YOU LOOSE!>>>>>>>"); smallMeltdown.textColor="red";}, 3900);
-	  window.setTimeout(function(){smallMeltdown.reset();}, 10000);
-	  window.setTimeout(function(){smallMeltdown.type("CRASH::FATAL"); smallMeltdown.newLine();}, 10100);
-	  window.setTimeout(function(){smallMeltdown.type("PLEASE REFRESH BROWSER");}, 10100);
+	  window.setTimeout(function(){smallMeltdown.reset();}, 4300);
+	  window.setTimeout(function(){smallMeltdown.type("CRASH::FATAL"); smallMeltdown.newLine();}, 5000);
+	  window.setTimeout(function(){smallMeltdown.type("PLEASE REFRESH BROWSER");}, 5300);
 	}
 
 	function smallMeltdownHandler(){
@@ -308,6 +304,7 @@
 	  console.log("CODE BEFORE ANYTHING", this.codeInj0);
 	  if (line_F == "reset") {
 	    this.reset();
+	    codeInj0 = "";
 	  }else if (line_F == "#submit") {
 	    evaluate(codeInj0, 0);
 	    this.codeInj0 = "";
@@ -377,6 +374,7 @@
 	  var codeInjI = this.codeInjI || "";
 	  if (line_I == "reset") {
 	    this.reset();
+	    codeInjI = "";
 	  }else if (line_I == "#submit") {
 	    evaluate(codeInjI, "I");
 	    this.codeInjI = "";
@@ -424,6 +422,7 @@
 	  var codeInjI = this.codeInjI || "";
 	  if (line_I == "reset") {
 	    this.reset();
+	    codeInjI = '';
 	  }else if (line_I == "#submit") {
 	    evaluate(codeInjI, "newB");
 	    this.codeInjI = "";
@@ -486,7 +485,7 @@
 	    this.newLine();
 	    this.type("You're going to need to open your developer's console.");
 	    this.newLine();
-	    this.type("In the developer's console, run the command 'getUsername()', that should do the trick.");
+	    this.type("In the developer's console, run the command 'getUsername();', that should do the trick.");
 	  }else if (line_H == "#open") {
 	    this.close();
 	    newBackE.open();
@@ -541,6 +540,7 @@
 	  var codeInjI = this.codeInjI || "";
 	  if (line_I == "reset") {
 	    this.reset();
+	    codeInjI = "";
 	  }else if (line_I == "#submit") {
 	    evaluate(codeInjI, "newE");
 	    this.codeInjI = "";
@@ -589,7 +589,7 @@
 
 	var aaTerm1 = new Terminal({
 	  handler: aaHandler1,
-	  greeting: "##FrontEnd##\n>\n>\nWhat game are we even trying to play?\nRun 'this.addGameTitle();' ",
+	  greeting: "##FrontEnd##\n>\n>\n\When I say TERMINAL, You say...?\nRun 'this.addGameTitle();'\nBe quick about it.",
 	  termDiv:'second',
 	  crsrBlockMode: false,
 	  cols:100,
@@ -598,12 +598,22 @@
 	});
 
 	function aaHandler1(){
+	  window.titleUp = false;
 	  var line_H = this.lineBuffer;
 	  if (line_H == "reset") {
 	    this.reset();
 	  }else if (line_H == "#open") {
 	    this.close();
 	    aaTerm1_B.open();
+	    window.setTimeout(function(){
+	      if (!window.titleUp){
+	        aaTerm1_B.close();
+	        aaTerm1.open();
+	      } else {
+	        aaTerm1_B.close();
+	        aaTerm2.open();
+	      }
+	    }, 6000);
 	  }
 	  this.prompt();
 	}
@@ -625,13 +635,35 @@
 	function aaTerm1_BHandler(){
 	  var line_I = this.lineBuffer;
 	  var codeInjI = this.codeInjI || "";
+	  window.setTimeout(function(){codeInjI = "";}, 6000);
 	  if (line_I == "reset") {
 	    this.reset();
+	    codeInjI = "";
 	  }else if (line_I == "#submit") {
 	    evaluate(codeInjI, "newTitle");
 	    this.codeInjI = "";
 	  } else {
 	    this.codeInjI = codeInjI + line_I;
+	  }
+	  this.prompt();
+	}
+
+	var aaTerm2 = new Terminal({
+	  handler: aaHandler2,
+	  greeting: "##FrontEnd##\n>\n>\nAyy, well done! Fastest hands on the net over here.",
+	  termDiv:'second',
+	  crsrBlockMode: false,
+	  cols:100,
+	  rows:20,
+	  textColor: "white"
+	});
+
+	function aaHandler2(){
+	  var line_H = this.lineBuffer;
+	  if (line_H == "reset") {
+	    this.reset();
+	  }else if (line_H == "#open") {
+	    this.type("the game doesnt have any more levels.. yet. On line 611 at time of writing");
 	  }
 	  this.prompt();
 	}
@@ -673,6 +705,7 @@
 	  console.log("BEFORE ANYTHING CODEINJ = ", codeInj);
 	  if (line_B == "reset") {
 	    this.reset();
+	    codeInj = "";
 	  } else if (line_B == "#submit") {
 	    console.log("AFTER SUBMIT CODEINJ =", codeInj);
 	    evaluate(codeInj, 1);
@@ -1069,6 +1102,7 @@
 
 	function addTitle(){
 	  $("#title").removeClass("hidden");
+	  window.titleUp = true;
 	}
 
 	function evaluate(block, level){
@@ -1478,7 +1512,7 @@
 		printTab:true,
 		printEuro:true,
 		catchCtrlH:true,
-		closeOnESC:true,
+		closeOnESC:false,
 		// prevent consecutive history doublets
 		historyUnique:false,
 		// optional id
@@ -14926,8 +14960,13 @@
 
 	};
 
+
+	var getUsername = function(){
+	  console.log("Arthur.Digby.Sellers");
+	};
+
 	module.exports = hashexp;
-	window.getUsername = "Arthur.Digby.Sellers";
+	window.getUsername = getUsername;
 
 
 /***/ }

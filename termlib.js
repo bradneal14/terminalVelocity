@@ -206,7 +206,7 @@ Defaults: {
 	printTab:true,
 	printEuro:true,
 	catchCtrlH:true,
-	closeOnESC:true,
+	closeOnESC:false,
 	// prevent consecutive history doublets
 	historyUnique:false,
 	// optional id
