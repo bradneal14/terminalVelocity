@@ -613,7 +613,7 @@
 	        aaTerm1_B.close();
 	        aaTerm2.open();
 	      }
-	    }, 6000);
+	    }, 6700);
 	  }
 	  this.prompt();
 	}
@@ -635,7 +635,7 @@
 	function aaTerm1_BHandler(){
 	  var line_I = this.lineBuffer;
 	  var codeInjI = this.codeInjI || "";
-	  window.setTimeout(function(){codeInjI = "";}, 6000);
+	  window.setTimeout(function(){codeInjI = "";}, 6700);
 	  if (line_I == "reset") {
 	    this.reset();
 	    codeInjI = "";
