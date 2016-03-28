@@ -903,7 +903,7 @@
 
 	var aaTerm7 = new Terminal({
 	  handler: aaHandler7,
-	  greeting: "##FrontEnd##\n>\n>\nWelcome to 7",
+	  greeting: "##FrontEnd##\n>\n>\nWelcome to 7\nUse \'#play\' to enable arrow key movement",
 	  termDiv:'second',
 	  crsrBlockMode: false,
 	  cols:100,
@@ -930,16 +930,40 @@
 	  this.prompt();
 	}
 
-	var nextLevel = function(){
-	  console.log("next level");
-	  context.clearRect(0, 0, myCanvas.width, myCanvas.height);
-	  aaTerm5.reset();
-	  aaTerm5.close();
-	  aaTerm6.open();
-	};
+	var aaTerm8 = new Terminal({
+	  handler: aaHandler8,
+	  greeting: "##FrontEnd##\n>\n>\nNice. Lets see how you do with some speed.\nUse \'#set\' to set the game followed by \'#bringit\' to begin.",
+	  termDiv:'second',
+	  crsrBlockMode: false,
+	  cols:100,
+	  rows:15,
+	  textColor: "white"
+	});
+
+	function aaHandler8(){
+	  console.log("here in 8");
+	  // this.charMode=true;
+	  var line_H = this.lineBuffer;
+	  if (line_H === "#set"){
+	    setupCanvas();
+	  } else if (line_H === "#bringit"){
+	    this.charMode = true;
+	    //begin movement
+	  } if (this.inputChar === this.termKey.DOWN){
+	    down3();
+	  } else if (this.inputChar === this.termKey.UP){
+	    up3();
+	  } else if (this.inputChar === this.termKey.POUND){
+	    console.log("pound");
+	  }
+	  this.prompt();
+	}
+
+
+
 
 	zeroTerm_A.open();
-
+	//terms14*term14*t14
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1383,6 +1407,8 @@
 	}
 
 	function addPlayer3(){
+	  curY = 100;
+	  curX = 0;
 	  context.fillStyle = "#FF0000";
 	  context.fillRect(0, 100, 50, 50);
 	  context.fillStyle = "#0000FF";
@@ -1391,13 +1417,29 @@
 
 
 	function addBorder(){
-	  context.fillStyle = "#FF4500";
+	  context.fillStyle = "#ff5a00";
 	  context.fillRect(0, 0, 600, 10);
-	  context.fillStyle = "#FF4500";
+	  context.fillStyle = "#ff5a00";
 	  context.fillRect(0, 240, 600, 10);
-	  context.fillRect(120, 100, 50, 180);
+	  context.fillRect(150, 100, 50, 180);
 	  context.fillRect(400, 10, 50, 180);
 	}
+
+
+	var setupCanvas = function(){
+	  curY = 100;
+	  curX = 0;
+	  context.fillStyle = "#FF0000";
+	  context.fillRect(0, 100, 50, 50);
+	  context.fillStyle = "#0000FF";
+	  context.fillRect(500, 10, 100, 200);
+	  context.fillStyle = "#ff5a00";
+	  context.fillRect(0, 0, 600, 10);
+	  context.fillStyle = "#ff5a00";
+	  context.fillRect(0, 240, 600, 10);
+	  context.fillRect(150, 100, 50, 180);
+	  context.fillRect(400, 10, 50, 180);
+	};
 
 
 	  // console.log("WIDTH", myCanvas.width);
@@ -1447,7 +1489,7 @@
 	  if (level === "addMoves"){
 	    if (codeStr === "this.addPlayerMoves();"){
 	      aaTerm4_B.close();
-	      addPlayer();
+	      addPlayer2();
 	      aaTerm5.open();
 	      console.log("green light");
 	    } else {
@@ -1459,7 +1501,7 @@
 	  if (level === "newPlayer"){
 	    if (codeStr === "this.addPlayer();"){
 	      aaTerm3_B.close();
-	      addPlayer();
+	      addPlayer2();
 	      aaTerm4.open();
 	      console.log("green light");
 	    } else {
@@ -1714,6 +1756,7 @@
 	  context.fillRect(curX, curY, 50, 50);
 	  if (curX >= 500 && curY < 50){
 	    nextLevel();
+	    return;
 	  }
 	};
 
@@ -1724,12 +1767,17 @@
 	  myCanvas.width = myCanvas.width;
 	  myCanvas.height = myCanvas.height;
 	  context.fillStyle = "#0000FF";
-	  context.fillRect(500, 0, 100, 50);
+	  context.fillRect(500, 10, 100, 50);
 	  context.fillStyle = "#FF0000";
 	  context.fillRect(curX, curY, 50, 50);
 	  if (curX >= 500 && curY < 50){
-	    nextLevel();
+	    nextLevel2();
+	    return;
 	  }
+	  console.log(curX, "x");
+	  console.log(curY, "y");
+	  addBorder();
+	  checkGame();
 	};
 
 
@@ -1739,17 +1787,21 @@
 	  }
 	  myCanvas.width = myCanvas.width;
 	  myCanvas.height = myCanvas.height;
-	    context.fillStyle = "#0000FF";
-	  context.fillRect(500, 0, 100, 50);
+	  context.fillStyle = "#0000FF";
+	  context.fillRect(500, 10, 100, 50);
 	  context.fillStyle = "#FF0000";
 	  context.fillRect(curX, curY, 50, 50);
 	  if (curX >= 500 && curY < 50){
-	    nextLevel();
+	    nextLevel2();
+	    return;
 	  }
+	  console.log(curX, "x");
+	  console.log(curY, "y");
+	  addBorder();
+	  checkGame();
 	};
 
 	var up2 = function(){
-	  console.log(curY, "y");
 	  if (curY >= (60)){
 	    curY -= 50;
 	  } else {
@@ -1758,18 +1810,21 @@
 	  myCanvas.width = myCanvas.width;
 	  myCanvas.height = myCanvas.height;
 	    context.fillStyle = "#0000FF";
-	  context.fillRect(500, 0, 100, 50);
+	  context.fillRect(500, 10, 100, 50);
 	  context.fillStyle = "#FF0000";
 	  context.fillRect(curX, curY, 50, 50);
 	  if (curX >= 500 && curY < 50){
-	    nextLevel();
+	    nextLevel2();
+	    return;
 	  }
-	  console.log(curY);
+	  console.log(curX, "x");
+	  console.log(curY, "y");
+	  addBorder();
+	  checkGame();
 	};
 
 	var down2 = function(){
-	  console.log(myCanvas.height, "HEIGHT");
-	  if (curY<=(150)){
+	  if (curY<(150)){
 	    curY += 50;
 	  } else {
 	    curY = 190;
@@ -1777,14 +1832,96 @@
 	  myCanvas.width = myCanvas.width;
 	  myCanvas.height = myCanvas.height;
 	  context.fillStyle = "#0000FF";
-	  context.fillRect(500, 0, 100, 50);
+	  context.fillRect(500, 10, 100, 50);
 	  context.fillStyle = "#FF0000";
 	  context.fillRect(curX, curY, 50, 50);
 	  if (curX >= 500 && curY < 50){
-	    nextLevel();
+	    nextLevel2();
+	    return;
 	  }
-	  console.log(curY);
+	  console.log(curX, "x");
+	  console.log(curY, "y");
+	  addBorder();
+	  checkGame();
 	};
+
+
+	var up3 = function(){
+	  if (curY >= (60)){
+	    curY -= 50;
+	  } else {
+	    curY = 10;
+	  }
+	  myCanvas.width = myCanvas.width;
+	  myCanvas.height = myCanvas.height;
+	    context.fillStyle = "#0000FF";
+	  context.fillRect(500, 10, 100, 50);
+	  context.fillStyle = "#FF0000";
+	  context.fillRect(curX, curY, 50, 50);
+	  if (curX >= 500 && curY < 50){
+	    nextLevel2();
+	    return;
+	  }
+	  console.log(curX, "x");
+	  console.log(curY, "y");
+	  addBorder();
+	  checkGame();
+	};
+
+	var down3 = function(){
+	  if (curY<(150)){
+	    curY += 50;
+	  } else {
+	    curY = 190;
+	  }
+	  myCanvas.width = myCanvas.width;
+	  myCanvas.height = myCanvas.height;
+	  context.fillStyle = "#0000FF";
+	  context.fillRect(500, 10, 100, 50);
+	  context.fillStyle = "#FF0000";
+	  context.fillRect(curX, curY, 50, 50);
+	  if (curX >= 500 && curY < 50){
+	    nextLevel2();
+	    return;
+	  }
+	  console.log(curX, "x");
+	  console.log(curY, "y");
+	  addBorder();
+	  checkGame();
+	};
+
+
+	var nextLevel = function(){
+	  console.log("next level");
+	  context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+	  aaTerm5.reset();
+	  aaTerm5.close();
+	  aaTerm6.open();
+	};
+
+	var nextLevel2 = function(){
+	  context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+	  console.log("2 got hit");
+	  aaTerm7.reset();
+	  aaTerm7.close();
+	  aaTerm8.open();
+	  context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+	};
+
+	var checkGame = function(){
+	  if ((curX >= 150 && curX < 200 && curY > 50) || (curX > 350 && curX < 450 && curY < 190)) {
+	    gameOver2();
+	  }
+	};
+
+	var gameOver2 = function(){
+	  console.log("game over got hit");
+	  context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+	  addPlayer3();
+	  addBorder();
+	};
+
+	//moves14*
 
 
 	window.Terminal = Terminal;
