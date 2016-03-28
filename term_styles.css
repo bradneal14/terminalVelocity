@@ -15,12 +15,19 @@
 	margin-left: 10%;
 }
 
+.testing{
+
+}
+
 .rules {
 	float: right;
 }
 
 #canvas {
-	background-color: blue;
+	background-color: pink;
+	height: 200px;
+	width: 600px;
+	margin-left: 270px;
 }
 
 

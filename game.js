@@ -86,6 +86,7 @@ var zeroTerm_A = new Terminal({
   rows:150,
 });
 
+
 function zeroTermHandler_A(){
   var line_0A = this.lineBuffer;
   if (line_0A === "server.skip();"){
@@ -96,6 +97,13 @@ function zeroTermHandler_A(){
     termResize();
     termReposition();
     newTerm_C.open();
+  } else if (line_0A === "title.jump();"){
+    this.close();
+    addBG();
+    addTitle();
+    termResize();
+    termReposition();
+    aaTerm2.open();
   } else if (line_0A != "#begin"){
     this.newLine();
     this.type("Command not recognized.");
@@ -567,7 +575,7 @@ function aaHandler1(){
         aaTerm1_B.close();
         aaTerm2.open();
       }
-    }, 6700);
+    }, 6350);
   }
   this.prompt();
 }
@@ -589,7 +597,7 @@ var aaTerm1_B = new Terminal({
 function aaTerm1_BHandler(){
   var line_I = this.lineBuffer;
   var codeInjI = this.codeInjI || "";
-  window.setTimeout(function(){codeInjI = "";}, 6700);
+  window.setTimeout(function(){codeInjI = "";}, 6350);
   if (line_I == "reset") {
     this.reset();
     codeInjI = "";
@@ -604,7 +612,7 @@ function aaTerm1_BHandler(){
 
 var aaTerm2 = new Terminal({
   handler: aaHandler2,
-  greeting: "##FrontEnd##\n>\n>\nAyy, well done! Fastest hands on the net over here.",
+  greeting: "##FrontEnd##\n>\n>\nAyy, well done! Fastest hands on the net over here.\nYou can use title.jump(); to get back here from now on.\nI think it's time to start on the game, don't you?\nthis.addGameCanvas();",
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
@@ -617,10 +625,138 @@ function aaHandler2(){
   if (line_H == "reset") {
     this.reset();
   }else if (line_H == "#open") {
-    this.type("the game doesnt have any more levels.. yet. On line 611 at time of writing");
+    aaTerm2.close();
+    aaTerm2_B.open();
   }
   this.prompt();
 }
+
+
+var aaTerm2_B = new Terminal({
+  handler: aaTerm2_BHandler,
+  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\n>",
+  termDiv:'second',
+  crsrBlockMode: false,
+  cols:100,
+  rows:20,
+  textColor: "#7FFF00"
+});
+
+
+function aaTerm2_BHandler(){
+  var line_I = this.lineBuffer;
+  var codeInjI = this.codeInjI || "";
+  if (line_I == "reset") {
+    this.reset();
+    codeInjI = "";
+  }else if (line_I == "#submit") {
+    evaluate(codeInjI, "newCanvas");
+    this.codeInjI = "";
+  } else {
+    this.codeInjI = codeInjI + line_I;
+  }
+  this.prompt();
+}
+
+
+var aaTerm3 = new Terminal({
+  handler: aaHandler3,
+  greeting: "##FrontEnd##\n>\n>\n>Cool, looks great.\nNow lets add a player.\nthis.addPlayer();",
+  termDiv:'second',
+  crsrBlockMode: false,
+  cols:100,
+  rows:20,
+  textColor: "white"
+});
+
+function aaHandler3(){
+  var line_H = this.lineBuffer;
+  if (line_H == "reset") {
+    this.reset();
+  }else if (line_H == "#open") {
+    aaTerm3.close();
+    aaTerm3_B.open();
+  }
+  this.prompt();
+}
+
+
+var aaTerm3_B = new Terminal({
+  handler: aaTerm3_BHandler,
+  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\n>",
+  termDiv:'second',
+  crsrBlockMode: false,
+  cols:100,
+  rows:20,
+  textColor: "#7FFF00"
+});
+
+
+function aaTerm3_BHandler(){
+  var line_I = this.lineBuffer;
+  var codeInjI = this.codeInjI || "";
+  if (line_I == "reset") {
+    this.reset();
+    codeInjI = "";
+  }else if (line_I == "#submit") {
+    evaluate(codeInjI, "newPlayer");
+    this.codeInjI = "";
+  } else {
+    this.codeInjI = codeInjI + line_I;
+  }
+  this.prompt();
+}
+
+var aaTerm4 = new Terminal({
+  handler: aaHandler4,
+  greeting: "##FrontEnd##\n>\n>\nWelcome to 4",
+  termDiv:'second',
+  crsrBlockMode: false,
+  cols:100,
+  rows:20,
+  textColor: "white"
+});
+
+function aaHandler4(){
+  var line_H = this.lineBuffer;
+  if (line_H == "reset") {
+    this.reset();
+  }else if (line_H == "#open") {
+    aaTerm4.close();
+    aaTerm4_B.open();
+  }
+  this.prompt();
+}
+
+var aaTerm4_B = new Terminal({
+  handler: aaTerm4_BHandler,
+  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\n>",
+  termDiv:'second',
+  crsrBlockMode: false,
+  cols:100,
+  rows:20,
+  textColor: "#7FFF00"
+});
+
+
+function aaTerm4_BHandler(){
+  var line_I = this.lineBuffer;
+  var codeInjI = this.codeInjI || "";
+  if (line_I == "reset") {
+    this.reset();
+    codeInjI = "";
+  }else if (line_I == "#submit") {
+    evaluate(codeInjI, "addSides");
+    this.codeInjI = "";
+  } else {
+    this.codeInjI = codeInjI + line_I;
+  }
+  this.prompt();
+}
+
+
+
+
 
 
 
@@ -631,195 +767,192 @@ zeroTerm_A.open();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var firstTerm_A = new Terminal({
-  handler: firstTermHandler_A,
-  greeting: "Welcome to level 1. \nEnter 'help' to see your toolbelt for this level.\nWhen ready, enter '#open' to attempt a submission.",
-  textColor: "white",
-  crsrBlockMode: false,
-});
-
-var firstTerm_B = new Terminal({
-  handler: firstTermHandler_B,
-  greeting: "Level 1. Type '#submit' to run. \nInsert code here:",
-  initHandler: reloadTitle
-});
-
-var reloadTitle = function(){
-  this.reset();
-};
-
-$( "#begin" ).click(function() {
-  firstTerm_A.open();
-});
-
-function firstTermHandler_B(){
-  var line_B = this.lineBuffer;
-  console.log("LINE", line_B);
-  var codeInj = this.codeInj || "";
-  console.log("BEFORE ANYTHING CODEINJ = ", codeInj);
-  if (line_B == "reset") {
-    this.reset();
-    codeInj = "";
-  } else if (line_B == "#submit") {
-    console.log("AFTER SUBMIT CODEINJ =", codeInj);
-    evaluate(codeInj, 1);
-    this.codeInj = "";
-  } else {
-    this.codeInj = codeInj + line_B;
-  }
-  this.prompt();
-}
-
-function firstTermHandler_A() {
- var line_A = this.lineBuffer;
- if (line_A == "#open"){
-   firstTerm_A.reset();
-   firstTerm_A.ps = "/$";
-   firstTerm_A.textColor = "#7FFF00";
-   firstTerm_A.close();
-   firstTerm_B.open();
- } else {
-   this.newLine();
- }
- if (line_A == "help") {
-   this.write(helpPage1);
- }
- else if (line_A=="reset"){
-   this.reset();
- }
- else if (line_A=="left"){
-   left();
- }
- else if (line_A=="up"){
-   up();
- }
- else if (line_A=="down"){
-   down();
- }
- else if (line_A=="big"){
-   start();
- }
- else if(line_A =="circle"){
-   placeCircle();
- }
- else if(line_A == "right"){
-   right();
- }
- else if(line_A =="erase"){
-   eraseCircle();
- }
- else if (line_A != "") {
-   this.write("You typed: "+line_A);
- }
- this.prompt();
-}
-
-
-var helpPage1 = [
-  "~>Wise decision..",
-  "~>This toolbelt will be one of your most \n~>valuable resources in this journey.",
-  "~>",
-  "~>Variables available:",
-  "~>   x = 14;",
-  "~>",
-  "~>Remember: Enter 'reset' at any time to reset terminal.",
-  "~>Have fun!"
-];
-
-
-var myCanvas = document.getElementById("canvas");
-var context = myCanvas.getContext("2d");
-
-var curX = 300;
-var curY = 50;
-
-var placeCircle = function(){
-  context.beginPath();
-  context.strokeStyle="#ff0000";
-  context.arc(75,105,70,0,2*Math.PI);
-  context.stroke();
-};
-
-var eraseCircle = function(){
-  context.clearRect(0, 0, myCanvas.width, myCanvas.height);
-};
-
-var nextLevel = function(){
-  console.log("next level");
-  myCanvas.width = myCanvas.width;
-  myCanvas.height = myCanvas.height;
-  context.fillStyle = "#FF0000";
-  context.fillRect(475, 0, 107, 50);
-  context.fillRect(curX, curY, 25, 25);
-};
-
-
-var left = function(){
-  if (curX>0){
-    curX -= 25;
-  }
-  myCanvas.width = myCanvas.width;
-  myCanvas.height = myCanvas.height;
-  context.fillRect(475, 0, 107, 50);
-  context.fillRect(curX, curY, 25, 25);
-  if (curX > 450 && curY < 50){
-    nextLevel();
-  }
-};
-
-var right = function(){
-  if (curX<(582-30)){
-    curX += 25;
-  }
-  myCanvas.width = myCanvas.width;
-  myCanvas.height = myCanvas.height;
-  context.fillRect(475, 0, 107, 50);
-  context.fillRect(curX, curY, 25, 25);
-  if (curX > 450 && curY < 50){
-    nextLevel();
-  }
-};
-
-var up = function(){
-  if (curY>(0)){
-    curY -= 25;
-  }
-  myCanvas.width = myCanvas.width;
-  myCanvas.height = myCanvas.height;
-  context.fillRect(475, 0, 107, 50);
-  context.fillRect(curX, curY, 25, 25);
-  if (curX > 450 && curY < 50){
-    nextLevel();
-  }
-};
-
-var down = function(){
-  if (curX<(375)){
-    curY += 25;
-  }
-  myCanvas.width = myCanvas.width;
-  myCanvas.height = myCanvas.height;
-  context.fillRect(475, 0, 107, 50);
-  context.fillRect(curX, curY, 25, 25);
-  if (curX > 450 && curY < 50){
-    nextLevel();
-  }
-};
-
-var start = function(){
-  context.fillRect(100,100,50,50);
-};
-
-var placeGoal = function(){
-  context.fillRect(475, 0, 107, 50);
-};
-
-var placeStart = function(){
-  context.fillRect(curX, curY, 25, 25);
-};
-
-placeStart();
-placeGoal();
+// var firstTerm_A = new Terminal({
+//   handler: firstTermHandler_A,
+//   greeting: "Welcome to level 1. \nEnter 'help' to see your toolbelt for this level.\nWhen ready, enter '#open' to attempt a submission.",
+//   textColor: "white",
+//   crsrBlockMode: false,
+// });
+//
+// var firstTerm_B = new Terminal({
+//   handler: firstTermHandler_B,
+//   greeting: "Level 1. Type '#submit' to run. \nInsert code here:",
+//   initHandler: reloadTitle
+// });
+//
+// var reloadTitle = function(){
+//   this.reset();
+// };
+//
+// $( "#begin" ).click(function() {
+//   firstTerm_A.open();
+// });
+//
+// function firstTermHandler_B(){
+//   var line_B = this.lineBuffer;
+//   console.log("LINE", line_B);
+//   var codeInj = this.codeInj || "";
+//   console.log("BEFORE ANYTHING CODEINJ = ", codeInj);
+//   if (line_B == "reset") {
+//     this.reset();
+//     codeInj = "";
+//   } else if (line_B == "#submit") {
+//     console.log("AFTER SUBMIT CODEINJ =", codeInj);
+//     evaluate(codeInj, 1);
+//     this.codeInj = "";
+//   } else {
+//     this.codeInj = codeInj + line_B;
+//   }
+//   this.prompt();
+// }
+//
+// function firstTermHandler_A() {
+//  var line_A = this.lineBuffer;
+//  if (line_A == "#open"){
+//    firstTerm_A.reset();
+//    firstTerm_A.ps = "/$";
+//    firstTerm_A.textColor = "#7FFF00";
+//    firstTerm_A.close();
+//    firstTerm_B.open();
+//  } else {
+//    this.newLine();
+//  }
+//  if (line_A == "help") {
+//    this.write(helpPage1);
+//  }
+//  else if (line_A=="reset"){
+//    this.reset();
+//  }
+//  else if (line_A=="left"){
+//    left();
+//  }
+//  else if (line_A=="up"){
+//    up();
+//  }
+//  else if (line_A=="down"){
+//    down();
+//  }
+//  else if (line_A=="big"){
+//    start();
+//  }
+//  else if(line_A =="circle"){
+//    placeCircle();
+//  }
+//  else if(line_A == "right"){
+//    right();
+//  }
+//  else if(line_A =="erase"){
+//    eraseCircle();
+//  }
+//  else if (line_A != "") {
+//    this.write("You typed: "+line_A);
+//  }
+//  this.prompt();
+// }
+//
+//
+// var helpPage1 = [
+//   "~>Wise decision..",
+//   "~>This toolbelt will be one of your most \n~>valuable resources in this journey.",
+//   "~>",
+//   "~>Variables available:",
+//   "~>   x = 14;",
+//   "~>",
+//   "~>Remember: Enter 'reset' at any time to reset terminal.",
+//   "~>Have fun!"
+// ];
+//
+//
+// var myCanvas = document.getElementById("canvas");
+// var context = myCanvas.getContext("2d");
+//
+// var curX = 300;
+// var curY = 50;
+//
+// var placeCircle = function(){
+//   context.beginPath();
+//   context.strokeStyle="#ff0000";
+//   context.arc(75,105,70,0,2*Math.PI);
+//   context.stroke();
+// };
+//
+// var eraseCircle = function(){
+//   context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+// };
+//
+// var nextLevel = function(){
+//   console.log("next level");
+//   myCanvas.width = myCanvas.width;
+//   myCanvas.height = myCanvas.height;
+  // context.fillStyle = "#FF0000";
+  // context.fillRect(475, 0, 107, 50);
+//   context.fillRect(curX, curY, 25, 25);
+// };
+//
+//
+// var left = function(){
+//   if (curX>0){
+//     curX -= 25;
+//   }
+//   myCanvas.width = myCanvas.width;
+//   myCanvas.height = myCanvas.height;
+//   context.fillRect(475, 0, 107, 50);
+//   context.fillRect(curX, curY, 25, 25);
+//   if (curX > 450 && curY < 50){
+//     nextLevel();
+//   }
+// };
+//
+// var right = function(){
+//   if (curX<(582-30)){
+//     curX += 25;
+//   }
+//   myCanvas.width = myCanvas.width;
+//   myCanvas.height = myCanvas.height;
+//   context.fillRect(475, 0, 107, 50);
+//   context.fillRect(curX, curY, 25, 25);
+//   if (curX > 450 && curY < 50){
+//     nextLevel();
+//   }
+// };
+//
+// var up = function(){
+//   if (curY>(0)){
+//     curY -= 25;
+//   }
+//   myCanvas.width = myCanvas.width;
+//   myCanvas.height = myCanvas.height;
+//   context.fillRect(475, 0, 107, 50);
+//   context.fillRect(curX, curY, 25, 25);
+//   if (curX > 450 && curY < 50){
+//     nextLevel();
+//   }
+// };
+//
+// var down = function(){
+//   if (curX<(375)){
+//     curY += 25;
+//   }
+//   myCanvas.width = myCanvas.width;
+//   myCanvas.height = myCanvas.height;
+//   context.fillRect(475, 0, 107, 50);
+//   context.fillRect(curX, curY, 25, 25);
+//   if (curX > 450 && curY < 50){
+//     nextLevel();
+//   }
+// };
+//
+//
+// var placeGoal = function(){
+//   context.fillRect(475, 0, 107, 50);
+// };
+//
+// var placeStart = function(){
+//   context.fillRect(curX, curY, 25, 25);
+// };
+//
+// placeStart();
+// placeGoal();
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //LEVEL 2:
@@ -1059,6 +1192,55 @@ function addTitle(){
   window.titleUp = true;
 }
 
+function addCanvas(){
+  $("#canvas").removeClass("hidden");
+}
+
+var myCanvas = document.getElementById("testing");
+var context = myCanvas.getContext("2d");
+var curX = 300;
+var curY = 50;
+
+console.log(context);
+
+function addPlayer(){
+  context.fillStyle = "#FF0000";
+  context.fillRect(0, 75, 50, 50);
+  context.fillStyle = "#00fff0";
+  context.fillRect(0, 0, 600, 10);
+  context.fillStyle = "#00fff0";
+  context.fillRect(0, 190, 600, 10);
+  context.fillStyle = "ffff0f";
+  context.fillRect(200, 180, 10, 10);
+}
+
+
+function addBorder(){
+  context.fillStyle = "#00fff0";
+  context.fillRect(0, 0, 600, 10);
+  context.fillStyle = "#00fff0";
+  context.fillRect(0, 190, 600, 10);
+}
+
+
+  // console.log("WIDTH", myCanvas.width);
+  // console.log("HEIGHT", myCanvas.height);
+  //
+
+  //
+  // var placeCircle2 = function(){
+  //   context.beginPath();
+  //   context.strokeStyle="#fff#o";
+  //   context.arc(75,105,70,0,2*Math.PI);
+  //   context.stroke();
+  // };
+  //
+  // placeCircle2();
+// }
+
+
+// eval14*
+
 function evaluate(block, level){
   console.log("MELTDOWN", meltDown);
   console.log("BLOCK", block);
@@ -1070,6 +1252,30 @@ function evaluate(block, level){
     } else {
       showStatus();
       window.setTimeout(function(){frontEnd_G.open();}, 12000);
+    }
+  }
+  if (level === "newPlayer"){
+    if (codeStr === "this.addPlayer();"){
+      aaTerm3_B.close();
+      addPlayer();
+      aaTerm4.open();
+      console.log("green light");
+    } else {
+      aaTerm3_B.close();
+      smallMeltdown.open();
+      console.log("red light");
+    }
+  }
+  if (level === "newCanvas"){
+    if (codeStr === "this.addGameCanvas();"){
+      aaTerm2_B.close();
+      addCanvas();
+      aaTerm3.open();
+      console.log("green light");
+    } else {
+      aaTerm2_B.close();
+      smallMeltdown.open();
+      console.log("red light");
     }
   }
   if (level === "newTitle"){
