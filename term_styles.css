@@ -12,7 +12,8 @@
 
 .title-image{
 	height: 200px;
-	margin-left: 10%;
+	margin-left: 100px;
+	margin-bottom: -40px;
 }
 
 .testing{
@@ -24,10 +25,12 @@
 }
 
 #canvas {
-	background-color: pink;
-	height: 200px;
+	background-image: url("https://i.ytimg.com/vi/i5sfEWIUxxQ/maxresdefault.jpg");
+	background-color: purple;
+	height: 250px;
 	width: 600px;
 	margin-left: 270px;
+	background-size: contain;
 }
 
 
@@ -53,7 +56,7 @@
 
 .second-level{
 	margin-top: 370px;
-	margin-left: 10%;
+	margin-left: 115px;
 	position: absolute;
 }
 

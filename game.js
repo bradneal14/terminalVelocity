@@ -46,7 +46,7 @@ var smallMeltdown = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   initHandler: smallMeltdownFunction
 });
 
@@ -104,7 +104,18 @@ function zeroTermHandler_A(){
     termResize();
     termReposition();
     aaTerm2.open();
-  } else if (line_0A != "#begin"){
+  } else if(line_0A === "current"){
+    this.close();
+    addBG();
+    addTitle();
+    termResize();
+    termReposition();
+    addCanvas();
+    addPlayer3();
+    addBorder();
+    aaTerm7.open();
+  }
+  else if (line_0A != "#begin"){
     this.newLine();
     this.type("Command not recognized.");
   } else {
@@ -353,7 +364,7 @@ var newTerm_A = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "white"
 });
 
@@ -375,7 +386,7 @@ var newTerm_B = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "#7FFF00"
 });
 
@@ -401,7 +412,7 @@ var newTerm_C = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "white"
 });
 
@@ -423,7 +434,7 @@ var newTerm_D = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "white"
 });
 
@@ -462,7 +473,7 @@ var newBackE = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "#7FFF00"
 });
 
@@ -473,7 +484,7 @@ var userTerm = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "#7FFF00"
 });
 
@@ -488,7 +499,7 @@ var passTerm = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "#7FFF00"
 });
 
@@ -518,7 +529,7 @@ var passTermA = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "#7FFF00"
 });
 
@@ -545,7 +556,7 @@ var aaTerm0 = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "white"
 });
 
@@ -555,7 +566,7 @@ var aaTerm1 = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "white"
 });
 
@@ -589,7 +600,7 @@ var aaTerm1_B = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "#7FFF00"
 });
 
@@ -616,7 +627,7 @@ var aaTerm2 = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "white"
 });
 
@@ -638,7 +649,7 @@ var aaTerm2_B = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "#7FFF00"
 });
 
@@ -665,7 +676,7 @@ var aaTerm3 = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "white"
 });
 
@@ -687,7 +698,7 @@ var aaTerm3_B = new Terminal({
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "#7FFF00"
 });
 
@@ -709,11 +720,11 @@ function aaTerm3_BHandler(){
 
 var aaTerm4 = new Terminal({
   handler: aaHandler4,
-  greeting: "##FrontEnd##\n>\n>\nWelcome to 4",
+  greeting: "##FrontEnd##\n>\n>\nNice job, lets give move around a bit\nthis.addPlayerMoves();",
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "white"
 });
 
@@ -730,11 +741,11 @@ function aaHandler4(){
 
 var aaTerm4_B = new Terminal({
   handler: aaTerm4_BHandler,
-  greeting: "/$ Terminal-Velocity-Server (v1.0.1.1) \n>\n>\n>",
+  greeting: "/$ Terminal-Velocity-Server 4(v1.0.1.1) \n>\n>\n>",
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
-  rows:20,
+  rows:15,
   textColor: "#7FFF00"
 });
 
@@ -742,11 +753,11 @@ var aaTerm4_B = new Terminal({
 function aaTerm4_BHandler(){
   var line_I = this.lineBuffer;
   var codeInjI = this.codeInjI || "";
-  if (line_I == "reset") {
+  if (line_I === "reset") {
     this.reset();
     codeInjI = "";
   }else if (line_I == "#submit") {
-    evaluate(codeInjI, "addSides");
+    evaluate(codeInjI, "addMoves");
     this.codeInjI = "";
   } else {
     this.codeInjI = codeInjI + line_I;
@@ -754,19 +765,139 @@ function aaTerm4_BHandler(){
   this.prompt();
 }
 
+// var toggleChar = function(){
+//   this.charMode? this.charMode = false : this.charMode = true;
+// };
+
+var aaTerm5 = new Terminal({
+  handler: aaHandler5,
+  greeting: "##FrontEnd##\n>\n>\nCool, that should give us some wiggle room.\nUse \"#play\" followed by enter to turn on arrow key movement.\nNow try moving left and right with the arrow keys.\nTry and get to the blue area.",
+  termDiv:'second',
+  crsrBlockMode: false,
+  cols:100,
+  rows:15,
+  textColor: "white",
+  // initHandler: charModeOn
+});
+
+function aaHandler5(){
+  console.log("here in 5");
+  this.charMode=true;
+  var line_H = this.lineBuffer;
+  if (this.inputChar === this.termKey.LEFT) {
+    left();
+  }else if (this.inputChar === this.termKey.RIGHT) {
+    right();
+  } else if (this.inputChar === this.termKey.DOWN){
+    down();
+  } else if (this.inputChar === this.termKey.UP){
+    up();
+  } else if (this.inputChar === this.termKey.POUND){
+    console.log("pound");
+    this.close();
+  }
+  this.prompt();
+}
 
 
 
+var myCanvas = document.getElementById("testing");
+var context = myCanvas.getContext("2d");
+var curX = 0;
+var curY = 100;
 
 
 
+var aaTerm6 = new Terminal({
+  handler: aaHandler6,
+  greeting: "##FrontEnd##\n>\n>\nGreat. Now that you have a feel for the movement, lets add a border to make it interesting\nthis.addBorder();",
+  termDiv:'second',
+  crsrBlockMode: false,
+  cols:100,
+  rows:15,
+  textColor: "white"
+});
+
+function aaHandler6(){
+  var line_H = this.lineBuffer;
+  if (line_H == "reset") {
+    this.reset();
+  }else if (line_H == "#open") {
+    aaTerm6.close();
+    aaTerm6_B.open();
+  }
+  this.prompt();
+}
+
+var aaTerm6_B = new Terminal({
+  handler: aaTerm6_BHandler,
+  greeting: "/$ Terminal-Velocity-Server 4(v1.0.1.1) \n>\n>\n>",
+  termDiv:'second',
+  crsrBlockMode: false,
+  cols:100,
+  rows:15,
+  textColor: "#7FFF00"
+});
+
+
+function aaTerm6_BHandler(){
+  var line_I = this.lineBuffer;
+  var codeInjI = this.codeInjI || "";
+  if (line_I === "reset") {
+    this.reset();
+    codeInjI = "";
+  }else if (line_I == "#submit") {
+    evaluate(codeInjI, "addBorder");
+    this.codeInjI = "";
+  } else {
+    this.codeInjI = codeInjI + line_I;
+  }
+  this.prompt();
+}
+
+var aaTerm7 = new Terminal({
+  handler: aaHandler7,
+  greeting: "##FrontEnd##\n>\n>\nWelcome to 7",
+  termDiv:'second',
+  crsrBlockMode: false,
+  cols:100,
+  rows:15,
+  textColor: "white"
+});
+
+function aaHandler7(){
+  console.log("here in 7");
+  this.charMode=true;
+  var line_H = this.lineBuffer;
+  if (this.inputChar === this.termKey.LEFT) {
+    left2();
+  }else if (this.inputChar === this.termKey.RIGHT) {
+    right2();
+  } else if (this.inputChar === this.termKey.DOWN){
+    down2();
+  } else if (this.inputChar === this.termKey.UP){
+    up2();
+  } else if (this.inputChar === this.termKey.POUND){
+    console.log("pound");
+    this.close();
+  }
+  this.prompt();
+}
+
+var nextLevel = function(){
+  console.log("next level");
+  context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+  aaTerm5.reset();
+  aaTerm5.close();
+  aaTerm6.open();
+};
 
 zeroTerm_A.open();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//
 // var firstTerm_A = new Terminal({
 //   handler: firstTermHandler_A,
 //   greeting: "Welcome to level 1. \nEnter 'help' to see your toolbelt for this level.\nWhen ready, enter '#open' to attempt a submission.",
@@ -884,8 +1015,8 @@ zeroTerm_A.open();
 //   console.log("next level");
 //   myCanvas.width = myCanvas.width;
 //   myCanvas.height = myCanvas.height;
-  // context.fillStyle = "#FF0000";
-  // context.fillRect(475, 0, 107, 50);
+//   context.fillStyle = "#FF0000";
+//   context.fillRect(475, 0, 107, 50);
 //   context.fillRect(curX, curY, 25, 25);
 // };
 //
@@ -1196,30 +1327,30 @@ function addCanvas(){
   $("#canvas").removeClass("hidden");
 }
 
-var myCanvas = document.getElementById("testing");
-var context = myCanvas.getContext("2d");
-var curX = 300;
-var curY = 50;
-
 console.log(context);
 
-function addPlayer(){
+function addPlayer2(){
   context.fillStyle = "#FF0000";
-  context.fillRect(0, 75, 50, 50);
-  context.fillStyle = "#00fff0";
-  context.fillRect(0, 0, 600, 10);
-  context.fillStyle = "#00fff0";
-  context.fillRect(0, 190, 600, 10);
-  context.fillStyle = "ffff0f";
-  context.fillRect(200, 180, 10, 10);
+  context.fillRect(0, 100, 50, 50);
+  context.fillStyle = "#0000FF";
+  context.fillRect(500, 0, 100, 50);
+}
+
+function addPlayer3(){
+  context.fillStyle = "#FF0000";
+  context.fillRect(0, 100, 50, 50);
+  context.fillStyle = "#0000FF";
+  context.fillRect(500, 10, 100, 50);
 }
 
 
 function addBorder(){
-  context.fillStyle = "#00fff0";
+  context.fillStyle = "#FF4500";
   context.fillRect(0, 0, 600, 10);
-  context.fillStyle = "#00fff0";
-  context.fillRect(0, 190, 600, 10);
+  context.fillStyle = "#FF4500";
+  context.fillRect(0, 240, 600, 10);
+  context.fillRect(120, 100, 50, 180);
+  context.fillRect(400, 10, 50, 180);
 }
 
 
@@ -1252,6 +1383,31 @@ function evaluate(block, level){
     } else {
       showStatus();
       window.setTimeout(function(){frontEnd_G.open();}, 12000);
+    }
+  }
+  if (level === "addBorder"){
+    if (codeStr === "this.addBorder();"){
+      aaTerm6_B.close();
+      addPlayer3();
+      addBorder();
+      aaTerm7.open();
+      console.log("green light");
+    } else {
+      aaTerm6_B.close();
+      smallMeltdown.open();
+      console.log("red light");
+    }
+  }
+  if (level === "addMoves"){
+    if (codeStr === "this.addPlayerMoves();"){
+      aaTerm4_B.close();
+      addPlayer();
+      aaTerm5.open();
+      console.log("green light");
+    } else {
+      aaTerm4_B.close();
+      smallMeltdown.open();
+      console.log("red light");
     }
   }
   if (level === "newPlayer"){
@@ -1453,6 +1609,136 @@ function thirdTermHandler_B(){
   }
   this.prompt();
 }
+
+var left = function(){
+  if (curX>=50){
+    curX -= 50;
+  }
+  myCanvas.width = myCanvas.width;
+  myCanvas.height = myCanvas.height;
+  context.fillStyle = "#0000FF";
+  context.fillRect(500, 0, 100, 50);
+  context.fillStyle = "#FF0000";
+  context.fillRect(curX, curY, 50, 50);
+  if (curX >= 500 && curY < 50){
+    nextLevel();
+  }
+};
+
+
+var right = function(){
+  if (curX<(550)){
+    curX += 50;
+  }
+  myCanvas.width = myCanvas.width;
+  myCanvas.height = myCanvas.height;
+    context.fillStyle = "#0000FF";
+  context.fillRect(500, 0, 100, 50);
+  context.fillStyle = "#FF0000";
+  context.fillRect(curX, curY, 50, 50);
+  if (curX >= 500 && curY < 50){
+    nextLevel();
+  }
+};
+
+var up = function(){
+  if (curY>(0)){
+    curY -= 50;
+  }
+  myCanvas.width = myCanvas.width;
+  myCanvas.height = myCanvas.height;
+    context.fillStyle = "#0000FF";
+  context.fillRect(500, 0, 100, 50);
+  context.fillStyle = "#FF0000";
+  context.fillRect(curX, curY, 50, 50);
+  if (curX >= 500 && curY < 50){
+    nextLevel();
+  }
+};
+
+var down = function(){
+  if (curY<(200)){
+    curY += 50;
+  }
+  myCanvas.width = myCanvas.width;
+  myCanvas.height = myCanvas.height;
+  context.fillStyle = "#0000FF";
+  context.fillRect(500, 0, 100, 50);
+  context.fillStyle = "#FF0000";
+  context.fillRect(curX, curY, 50, 50);
+  if (curX >= 500 && curY < 50){
+    nextLevel();
+  }
+};
+
+var left2 = function(){
+  if (curX>=50){
+    curX -= 50;
+  }
+  myCanvas.width = myCanvas.width;
+  myCanvas.height = myCanvas.height;
+  context.fillStyle = "#0000FF";
+  context.fillRect(500, 0, 100, 50);
+  context.fillStyle = "#FF0000";
+  context.fillRect(curX, curY, 50, 50);
+  if (curX >= 500 && curY < 50){
+    nextLevel();
+  }
+};
+
+
+var right2 = function(){
+  if (curX<(550)){
+    curX += 50;
+  }
+  myCanvas.width = myCanvas.width;
+  myCanvas.height = myCanvas.height;
+    context.fillStyle = "#0000FF";
+  context.fillRect(500, 0, 100, 50);
+  context.fillStyle = "#FF0000";
+  context.fillRect(curX, curY, 50, 50);
+  if (curX >= 500 && curY < 50){
+    nextLevel();
+  }
+};
+
+var up2 = function(){
+  console.log(curY, "y");
+  if (curY >= (60)){
+    curY -= 50;
+  } else {
+    curY = 10;
+  }
+  myCanvas.width = myCanvas.width;
+  myCanvas.height = myCanvas.height;
+    context.fillStyle = "#0000FF";
+  context.fillRect(500, 0, 100, 50);
+  context.fillStyle = "#FF0000";
+  context.fillRect(curX, curY, 50, 50);
+  if (curX >= 500 && curY < 50){
+    nextLevel();
+  }
+  console.log(curY);
+};
+
+var down2 = function(){
+  console.log(myCanvas.height, "HEIGHT");
+  if (curY<=(150)){
+    curY += 50;
+  } else {
+    curY = 190;
+  }
+  myCanvas.width = myCanvas.width;
+  myCanvas.height = myCanvas.height;
+  context.fillStyle = "#0000FF";
+  context.fillRect(500, 0, 100, 50);
+  context.fillStyle = "#FF0000";
+  context.fillRect(curX, curY, 50, 50);
+  if (curX >= 500 && curY < 50){
+    nextLevel();
+  }
+  console.log(curY);
+};
 
 
 window.Terminal = Terminal;

@@ -2245,6 +2245,7 @@ globals: {
 		'IS2': 0x1E,
 		'IS1': 0x1F,
 		'DEL': 0x7F,
+		'POUND': 0x23,
 		// other specials
 		'EURO': 0x20AC,
 		// cursor mapping
