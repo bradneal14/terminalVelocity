@@ -1432,7 +1432,7 @@
 	  context.fillStyle = "#FF0000";
 	  context.fillRect(0, 100, 50, 50);
 	  context.fillStyle = "#0000FF";
-	  context.fillRect(500, 10, 100, 200);
+	  context.fillRect(550, 10, 50, 230);
 	  context.fillStyle = "#ff5a00";
 	  context.fillRect(0, 0, 600, 10);
 	  context.fillStyle = "#ff5a00";
@@ -1855,7 +1855,7 @@
 	  myCanvas.width = myCanvas.width;
 	  myCanvas.height = myCanvas.height;
 	    context.fillStyle = "#0000FF";
-	  context.fillRect(500, 10, 100, 50);
+	  context.fillRect(550, 10, 50, 230);
 	  context.fillStyle = "#FF0000";
 	  context.fillRect(curX, curY, 50, 50);
 	  if (curX >= 500 && curY < 50){
@@ -1877,7 +1877,7 @@
 	  myCanvas.width = myCanvas.width;
 	  myCanvas.height = myCanvas.height;
 	  context.fillStyle = "#0000FF";
-	  context.fillRect(500, 10, 100, 50);
+	  context.fillRect(550, 10, 50, 230);
 	  context.fillStyle = "#FF0000";
 	  context.fillRect(curX, curY, 50, 50);
 	  if (curX >= 500 && curY < 50){
