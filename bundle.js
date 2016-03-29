@@ -15699,7 +15699,7 @@
 	  createBlock: function(){
 	    var h = Math.random() * (170 - 150) + 150;
 	    var t = Math.random();
-	    if (t < .4999){
+	    if (t < .499){
 	      var y = 10;
 	    } else {
 	      var y = 250 - (h + 10);
