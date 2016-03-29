@@ -1379,6 +1379,16 @@ function addBorder(){
   context.fillRect(400, 10, 50, 180);
 }
 
+function addBorder2(){
+  context.fillStyle = "#ff5a00";
+  context.fillRect(0, 0, 600, 10);
+  context.fillStyle = "#ff5a00";
+  context.fillRect(0, 240, 600, 10);
+  context.fillRect(150, 10, 50, 180);
+  context.fillRect(400, 70, 50, 180);
+}
+
+
 
 var setupCanvas = function(){
   curY = 100;
@@ -1391,8 +1401,8 @@ var setupCanvas = function(){
   context.fillRect(0, 0, 600, 10);
   context.fillStyle = "#ff5a00";
   context.fillRect(0, 240, 600, 10);
-  context.fillRect(150, 100, 50, 180);
-  context.fillRect(400, 10, 50, 180);
+  context.fillRect(150, 10, 50, 180);
+  context.fillRect(400, 70, 50, 180);
 };
 
 
@@ -1818,7 +1828,7 @@ var up3 = function(){
   }
   console.log(curX, "x");
   console.log(curY, "y");
-  addBorder();
+  addBorder2();
   checkGame();
 };
 
@@ -1840,7 +1850,7 @@ var down3 = function(){
   }
   console.log(curX, "x");
   console.log(curY, "y");
-  addBorder();
+  addBorder2();
   checkGame();
 };
 
