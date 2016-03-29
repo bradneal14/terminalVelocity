@@ -1,6 +1,8 @@
 var Terminal = require('./termlib.js');
 var $ = require('jquery');
 var hash = require('./hash.js');
+var Structures = require("./structures.js");
+var Asteroids = require("./object.js");
 
 var meltDown = new Terminal({
   textColor: "white",
@@ -114,6 +116,8 @@ function zeroTermHandler_A(){
     addPlayer3();
     addBorder();
     aaTerm7.open();
+  } else if(line_0A === "spit"){
+    console.log(window.Structures.ex);
   }
   else if (line_0A != "#begin"){
     this.newLine();
@@ -901,6 +905,7 @@ function aaHandler8(){
   if (line_H === "#set"){
     setupCanvas();
   } else if (line_H === "#bringit"){
+    bringIt();
     this.charMode = true;
     //begin movement
   } if (this.inputChar === this.termKey.DOWN){
@@ -908,7 +913,7 @@ function aaHandler8(){
   } else if (this.inputChar === this.termKey.UP){
     up3();
   } else if (this.inputChar === this.termKey.POUND){
-    console.log("pound");
+    bringIt();
   }
   this.prompt();
 }
@@ -1393,16 +1398,21 @@ function addBorder2(){
 var setupCanvas = function(){
   curY = 100;
   curX = 0;
-  context.fillStyle = "#FF0000";
-  context.fillRect(0, 100, 50, 50);
-  context.fillStyle = "#0000FF";
-  context.fillRect(550, 10, 50, 230);
-  context.fillStyle = "#ff5a00";
-  context.fillRect(0, 0, 600, 10);
-  context.fillStyle = "#ff5a00";
-  context.fillRect(0, 240, 600, 10);
-  context.fillRect(150, 10, 50, 180);
-  context.fillRect(400, 70, 50, 180);
+  Structures.draw.apply(context);
+  // context.fillStyle = "#FF0000";
+  // context.fillRect(0, 100, 50, 50);
+  // context.fillStyle = "#0000FF";
+  // context.fillRect(550, 10, 50, 230);
+  // context.fillStyle = "#ff5a00";
+  // context.fillRect(0, 0, 600, 10);
+  // context.fillStyle = "#ff5a00";
+  // context.fillRect(0, 240, 600, 10);
+  // context.fillRect(150, 10, 50, 180);
+  // context.fillRect(400, 70, 50, 180);
+};
+
+var bringIt = function(){
+  Structures.moveForward.apply(context);
 };
 
 

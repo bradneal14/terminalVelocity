@@ -11,8 +11,12 @@
     this.game = options.game;
   };
 
+  var Something = Asteroids.Something = function() {
+    console.log("something worked");
+  };
+
   MovingObject.prototype.collideWith = function (otherObject) {
-    ; // default do nothing
+     // default do nothing
   };
 
   MovingObject.prototype.draw = function (ctx) {
@@ -26,8 +30,8 @@
   };
 
   MovingObject.prototype.isCollidedWith = function (otherObject) {
-    var centerDist = Asteroids.Util.dist(this.pos, otherObject.pos);
-    return centerDist < (this.radius + otherObject.radius);
+    // var centerDist = Asteroids.Util.dist(this.pos, otherObject.pos);
+    // return centerDist < (this.radius + otherObject.radius);
   };
 
   MovingObject.prototype.isWrappable = true;

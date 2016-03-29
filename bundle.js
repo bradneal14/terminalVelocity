@@ -47,6 +47,8 @@
 	var Terminal = __webpack_require__(1);
 	var $ = __webpack_require__(2);
 	var hash = __webpack_require__(3);
+	var Structures = __webpack_require__(5);
+	var Asteroids = __webpack_require__(4);
 
 	var meltDown = new Terminal({
 	  textColor: "white",
@@ -160,6 +162,8 @@
 	    addPlayer3();
 	    addBorder();
 	    aaTerm7.open();
+	  } else if(line_0A === "spit"){
+	    console.log(window.Structures.ex);
 	  }
 	  else if (line_0A != "#begin"){
 	    this.newLine();
@@ -947,6 +951,7 @@
 	  if (line_H === "#set"){
 	    setupCanvas();
 	  } else if (line_H === "#bringit"){
+	    bringIt();
 	    this.charMode = true;
 	    //begin movement
 	  } if (this.inputChar === this.termKey.DOWN){
@@ -954,7 +959,7 @@
 	  } else if (this.inputChar === this.termKey.UP){
 	    up3();
 	  } else if (this.inputChar === this.termKey.POUND){
-	    console.log("pound");
+	    bringIt();
 	  }
 	  this.prompt();
 	}
@@ -1439,16 +1444,21 @@
 	var setupCanvas = function(){
 	  curY = 100;
 	  curX = 0;
-	  context.fillStyle = "#FF0000";
-	  context.fillRect(0, 100, 50, 50);
-	  context.fillStyle = "#0000FF";
-	  context.fillRect(550, 10, 50, 230);
-	  context.fillStyle = "#ff5a00";
-	  context.fillRect(0, 0, 600, 10);
-	  context.fillStyle = "#ff5a00";
-	  context.fillRect(0, 240, 600, 10);
-	  context.fillRect(150, 10, 50, 180);
-	  context.fillRect(400, 70, 50, 180);
+	  Structures.draw.apply(context);
+	  // context.fillStyle = "#FF0000";
+	  // context.fillRect(0, 100, 50, 50);
+	  // context.fillStyle = "#0000FF";
+	  // context.fillRect(550, 10, 50, 230);
+	  // context.fillStyle = "#ff5a00";
+	  // context.fillRect(0, 0, 600, 10);
+	  // context.fillStyle = "#ff5a00";
+	  // context.fillRect(0, 240, 600, 10);
+	  // context.fillRect(150, 10, 50, 180);
+	  // context.fillRect(400, 70, 50, 180);
+	};
+
+	var bringIt = function(){
+	  Structures.moveForward.apply(context);
 	};
 
 
@@ -15607,6 +15617,128 @@
 
 	module.exports = hashexp;
 	window.getUsername = getUsername;
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	(function () {
+	  if (typeof Asteroids === "undefined") {
+	    window.Asteroids = {};
+	  }
+
+	  var MovingObject = Asteroids.MovingObject = function (options) {
+	    this.pos = options.pos;
+	    this.vel = options.vel;
+	    this.radius = options.radius;
+	    this.color = options.color;
+	    this.game = options.game;
+	  };
+
+	  var Something = Asteroids.Something = function() {
+	    console.log("something worked");
+	  };
+
+	  MovingObject.prototype.collideWith = function (otherObject) {
+	     // default do nothing
+	  };
+
+	  MovingObject.prototype.draw = function (ctx) {
+	    ctx.fillStyle = this.color;
+
+	    ctx.beginPath();
+	    ctx.arc(
+	      this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI, true
+	    );
+	    ctx.fill();
+	  };
+
+	  MovingObject.prototype.isCollidedWith = function (otherObject) {
+	    // var centerDist = Asteroids.Util.dist(this.pos, otherObject.pos);
+	    // return centerDist < (this.radius + otherObject.radius);
+	  };
+
+	  MovingObject.prototype.isWrappable = true;
+
+	  var NORMAL_FRAME_TIME_DELTA = 1000/60;
+	  MovingObject.prototype.move = function (timeDelta) {
+	    //timeDelta is number of milliseconds since last move
+	    //if the computer is busy the time delta will be larger
+	    //in this case the MovingObject should move farther in this frame
+	    //velocity of object is how far it should move in 1/60th of a second
+	    var velocityScale = timeDelta / NORMAL_FRAME_TIME_DELTA,
+	        offsetX = this.vel[0] * velocityScale,
+	        offsetY = this.vel[1] * velocityScale;
+
+	    this.pos = [this.pos[0] + offsetX, this.pos[1] + offsetY];
+
+	    if (this.game.isOutOfBounds(this.pos)) {
+	      if (this.isWrappable) {
+	        this.pos = this.game.wrap(this.pos);
+	      } else {
+	        this.remove();
+	      }
+	    }
+	  };
+
+	  MovingObject.prototype.remove = function () {
+	    this.game.remove(this);
+	  };
+	})();
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	var Structures = {
+	  spit: function(){
+	    console.log("SPITTING");
+	  },
+	  createBlock: function(){
+	    var h = Math.random() * (170 - 150) + 150;
+	    var t = Math.random();
+	    if (t < .4999){
+	      var y = 10;
+	    } else {
+	      var y = 250 - (h + 10);
+	    }
+	    var x = Math.random() * (550 - 10);
+	    var w = 50;
+	    console.log(x,y,h,w);
+	    Structures.shift.apply(this,[x, y, w, h]);
+	  },
+	  draw: function(){
+	    var context = this;
+	    context.fillStyle = "#FF0000";
+	    context.fillRect(0, 100, 50, 50);
+	    context.fillStyle = "#0000FF";
+	    context.fillRect(550, 10, 50, 230);
+	    context.fillStyle = "#ff5a00";
+	    context.fillRect(0, 0, 600, 10);
+	    context.fillStyle = "#ff5a00";
+	    context.fillRect(0, 240, 600, 10);
+	    context.fillRect(150, 10, 50, 180);
+	    context.fillRect(400, 70, 50, 180);
+	  },
+	  ex: function(){
+	    for (var x = 0; x < 6; x++){
+	      console.log(x);
+	    }
+	  },
+	  shift: function(x, y, w, h){
+	    var context = this;
+	    context.fillStyle = "#ff5a00";
+	    context.fillRect(x,y,w,h);
+	  },
+	  moveForward: function(){
+	    var context = this;
+	    Structures.createBlock.apply(context);
+	  }
+	};
+
+	module.exports = Structures;
 
 
 /***/ }
