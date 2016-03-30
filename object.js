@@ -19,7 +19,7 @@
   MovingObject.prototype.draw = function (ctx) {
     ctx.fillStyle = "#000000";
     ctx.fillRect(this.xVal, this.yVal, this.width, this.height);
-    ctx.move(this.vel);
+    setInterval(this.move(this.vel, ctx), 3000);
   };
 
   MovingObject.prototype.isCollidedWith = function (otherObject) {
@@ -30,13 +30,16 @@
   MovingObject.prototype.isWrappable = true;
 
   var NORMAL_FRAME_TIME_DELTA = 1000/60;
-  MovingObject.prototype.move = function (timeDelta) {
+  MovingObject.prototype.move = function (timeDelta, ctx) {
+    var seconds = new Date().getTime() / 1000;
+
     //timeDelta is number of milliseconds since last move
     //if the computer is busy the time delta will be larger
     //in this case the MovingObject should move farther in this frame
     //velocity of object is how far it should move in 1/60th of a second
     var velocityScale = timeDelta / NORMAL_FRAME_TIME_DELTA;
-    this.xVal -= velocityScale;
+    this.xVal -= 60;
+    this.draw(ctx);
   };
 
   MovingObject.prototype.remove = function () {

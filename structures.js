@@ -13,7 +13,7 @@ var Structures = {
     } else {
       var y = 250 - (h + 10);
     }
-    var x = 500;
+    var x = 550;
     var w = 50;
     console.log(x,y,h,w);
     var options = {"xVal": x, "yVal": y, "vel": 3, "height": h, "width": w};
