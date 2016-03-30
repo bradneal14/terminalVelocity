@@ -13,7 +13,7 @@
   };
 
   MovingObject.prototype.collideWith = function (otherObject) {
-     // default do nothing  /
+     // default do nothing    /
   };
 
   MovingObject.prototype.draw = function (ctx) {
