@@ -114,8 +114,7 @@ function zeroTermHandler_A(){
     termResize();
     termReposition();
     addCanvas();
-    setupCanvas();
-    aaTerm8.open();
+    aaTerm6.open();
   } else if(line_0A === "spit"){
     console.log(window.Structures.ex);
   }
@@ -890,7 +889,7 @@ function aaHandler7(){
 
 var aaTerm8 = new Terminal({
   handler: aaHandler8,
-  greeting: "##FrontEnd##\n>\n>\nNice. Lets see how you do with some speed.\nUse \'#bringit\' to begin.",
+  greeting: "##FrontEnd##\n>\n>\nCongratulations you beat the game!!!",
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
@@ -1858,6 +1857,8 @@ var nextLevel = function(){
 
 var nextLevel2 = function(){
   context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+  context.fillStyle="#0000ff";
+  context.fillRect(0, 0, myCanvas.width, myCanvas.height);
   console.log("2 got hit");
   aaTerm7.reset();
   aaTerm7.close();

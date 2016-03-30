@@ -47,8 +47,8 @@
 	var Terminal = __webpack_require__(1);
 	var $ = __webpack_require__(2);
 	var hash = __webpack_require__(3);
-	var Structures = __webpack_require__(5);
-	var someObject = __webpack_require__(4);
+	var Structures = __webpack_require__(4);
+	var someObject = __webpack_require__(5);
 	var Obj = __webpack_require__(6);
 
 	var meltDown = new Terminal({
@@ -160,8 +160,7 @@
 	    termResize();
 	    termReposition();
 	    addCanvas();
-	    setupCanvas();
-	    aaTerm8.open();
+	    aaTerm6.open();
 	  } else if(line_0A === "spit"){
 	    console.log(window.Structures.ex);
 	  }
@@ -936,7 +935,7 @@
 
 	var aaTerm8 = new Terminal({
 	  handler: aaHandler8,
-	  greeting: "##FrontEnd##\n>\n>\nNice. Lets see how you do with some speed.\nUse \'#bringit\' to begin.",
+	  greeting: "##FrontEnd##\n>\n>\nCongratulations you beat the game!!!",
 	  termDiv:'second',
 	  crsrBlockMode: false,
 	  cols:100,
@@ -1904,6 +1903,8 @@
 
 	var nextLevel2 = function(){
 	  context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+	  context.fillStyle="#0000ff";
+	  context.fillRect(0, 0, myCanvas.width, myCanvas.height);
 	  console.log("2 got hit");
 	  aaTerm7.reset();
 	  aaTerm7.close();
@@ -15605,64 +15606,9 @@
 
 /***/ },
 /* 4 */
-/***/ function(module, exports) {
-
-	  var someObject = {};
-
-	  var MovingObject = someObject.MovingObject = function (options) {
-	    this.xVal = options.xVal;
-	    this.yVal = options.yVal;
-	    this.vel = options.vel;
-	    this.height = options.height;
-	    this.width = options.width;
-	  };
-
-	  var Something = someObject.Something = function() {
-	    console.log("something worked");
-	  };
-
-	  MovingObject.prototype.collideWith = function (otherObject) {
-	     // default do nothing    /
-	  };
-
-	  MovingObject.prototype.draw = function (ctx) {
-	    ctx.fillStyle = "#000000";
-	    ctx.fillRect(this.xVal, this.yVal, this.width, this.height);
-	    setInterval(this.move(this.vel, ctx), 3000);
-	  };
-
-	  MovingObject.prototype.isCollidedWith = function (otherObject) {
-	    // var centerDist = someObject.Util.dist(this.pos, otherObject.pos);
-	    // return centerDist < (this.radius + otherObject.radius);
-	  };
-
-	  MovingObject.prototype.isWrappable = true;
-
-	  var NORMAL_FRAME_TIME_DELTA = 1000/60;
-	  MovingObject.prototype.move = function (timeDelta, ctx) {
-	    var seconds = new Date().getTime() / 1000;
-
-	    //timeDelta is number of milliseconds since last move
-	    //if the computer is busy the time delta will be larger
-	    //in this case the MovingObject should move farther in this frame
-	    //velocity of object is how far it should move in 1/60th of a second
-	    var velocityScale = timeDelta / NORMAL_FRAME_TIME_DELTA;
-	    this.xVal -= 60;
-	    this.draw(ctx);
-	  };
-
-	  MovingObject.prototype.remove = function () {
-	    this.game.remove(this);
-	  };
-
-	  module.exports = someObject;
-
-
-/***/ },
-/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var someObject = __webpack_require__(4);
+	var someObject = __webpack_require__(5);
 
 
 	var Structures = {
@@ -15717,6 +15663,69 @@
 	};
 
 	module.exports = Structures;
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	  var someObject = {};
+
+	  var MovingObject = someObject.MovingObject = function (options) {
+	    this.xVal = options.xVal;
+	    this.yVal = options.yVal;
+	    this.vel = options.vel;
+	    this.height = options.height;
+	    this.width = options.width;
+	  };
+
+	  var Something = someObject.Something = function() {
+	    console.log("something worked");
+	  };
+
+	  MovingObject.prototype.collideWith = function (otherObject) {
+	     // default do nothing    /
+	  };
+
+
+
+	  MovingObject.prototype.isCollidedWith = function (otherObject) {
+	    // var centerDist = someObject.Util.dist(this.pos, otherObject.pos);
+	    // return centerDist < (this.radius + otherObject.radius);
+	  };
+
+	  MovingObject.prototype.isWrappable = true;
+
+	  var NORMAL_FRAME_TIME_DELTA = 1000/60;
+
+	  MovingObject.prototype.move = function (timeDelta, ctx) {
+	    //timeDelta is number of milliseconds since last move
+	    //if the computer is busy the time delta will be larger
+	    //in this case the MovingObject should move farther in this frame
+	    //velocity of object is how far it should move in 1/60th of a second
+	    var velocityScale = timeDelta / NORMAL_FRAME_TIME_DELTA;
+	    ctx.clearRect(this.xVal, this.yVal, this.width, this.height);
+	    this.xVal -= 60;
+	    function draw(){
+	      setTimeout //try this
+	      requestAnimationFrame(draw);
+	      ctx.fillRect(this.xVal, this.yVal, this.width, this.height)
+	    }
+	    // this.draw(ctx);
+	    console.log("in move");
+	  };
+	  MovingObject.prototype.draw = function (ctx) {
+	    ctx.fillStyle = "#0ff000";
+	    console.log(this);
+	    console.log(ctx);
+	    ctx.fillRect(this.xVal, this.yVal, this.width, this.height);
+	  };
+
+	  MovingObject.prototype.remove = function () {
+	    this.game.remove(this);
+	  };
+
+	  module.exports = someObject;
 
 
 /***/ },
