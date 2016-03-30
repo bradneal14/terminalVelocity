@@ -1,3 +1,6 @@
+var someObject = require("./object.js");
+
+
 var Structures = {
   spit: function(){
     console.log("SPITTING");
@@ -10,23 +13,28 @@ var Structures = {
     } else {
       var y = 250 - (h + 10);
     }
-    var x = Math.random() * (550 - 10);
+    var x = 500;
     var w = 50;
     console.log(x,y,h,w);
-    Structures.shift.apply(this,[x, y, w, h]);
+    var options = {"xVal": x, "yVal": y, "vel": 3, "height": h, "width": w};
+    var block = new someObject.MovingObject(options);
+    block.draw(this);
   },
-  draw: function(){
+  set: function(){
     var context = this;
     context.fillStyle = "#FF0000";
     context.fillRect(0, 100, 50, 50);
-    context.fillStyle = "#0000FF";
-    context.fillRect(550, 10, 50, 230);
     context.fillStyle = "#ff5a00";
     context.fillRect(0, 0, 600, 10);
     context.fillStyle = "#ff5a00";
     context.fillRect(0, 240, 600, 10);
-    context.fillRect(150, 10, 50, 180);
-    context.fillRect(400, 70, 50, 180);
+  },
+  send: function(x, y, w, h){
+    // var context = this;
+    // for (var i = x; i > 0; i-=10){
+    //   window.setTimeout(function(){context.fillRect(i,y,w,h);}, 1000);
+    //   window.setTimeout(function(){context.clearRect(i,y,w,h);}, 1500);
+    // }
   },
   ex: function(){
     for (var x = 0; x < 6; x++){

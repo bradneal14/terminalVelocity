@@ -1,17 +1,14 @@
-(function () {
-  if (typeof Asteroids === "undefined") {
-    window.Asteroids = {};
-  }
+  var someObject = {};
 
-  var MovingObject = Asteroids.MovingObject = function (options) {
-    this.pos = options.pos;
+  var MovingObject = someObject.MovingObject = function (options) {
+    this.xVal = options.xVal;
+    this.yVal = options.yVal;
     this.vel = options.vel;
-    this.radius = options.radius;
-    this.color = options.color;
-    this.game = options.game;
+    this.height = options.height;
+    this.width = options.width;
   };
 
-  var Something = Asteroids.Something = function() {
+  var Something = someObject.Something = function() {
     console.log("something worked");
   };
 
@@ -20,17 +17,13 @@
   };
 
   MovingObject.prototype.draw = function (ctx) {
-    ctx.fillStyle = this.color;
-
-    ctx.beginPath();
-    ctx.arc(
-      this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI, true
-    );
-    ctx.fill();
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(this.xVal, this.yVal, this.width, this.height);
+    ctx.move(this.vel);
   };
 
   MovingObject.prototype.isCollidedWith = function (otherObject) {
-    // var centerDist = Asteroids.Util.dist(this.pos, otherObject.pos);
+    // var centerDist = someObject.Util.dist(this.pos, otherObject.pos);
     // return centerDist < (this.radius + otherObject.radius);
   };
 
@@ -42,22 +35,12 @@
     //if the computer is busy the time delta will be larger
     //in this case the MovingObject should move farther in this frame
     //velocity of object is how far it should move in 1/60th of a second
-    var velocityScale = timeDelta / NORMAL_FRAME_TIME_DELTA,
-        offsetX = this.vel[0] * velocityScale,
-        offsetY = this.vel[1] * velocityScale;
-
-    this.pos = [this.pos[0] + offsetX, this.pos[1] + offsetY];
-
-    if (this.game.isOutOfBounds(this.pos)) {
-      if (this.isWrappable) {
-        this.pos = this.game.wrap(this.pos);
-      } else {
-        this.remove();
-      }
-    }
+    var velocityScale = timeDelta / NORMAL_FRAME_TIME_DELTA;
+    this.xVal -= velocityScale;
   };
 
   MovingObject.prototype.remove = function () {
     this.game.remove(this);
   };
-})();
+
+  module.exports = someObject;

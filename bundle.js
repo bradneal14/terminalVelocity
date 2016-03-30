@@ -48,7 +48,8 @@
 	var $ = __webpack_require__(2);
 	var hash = __webpack_require__(3);
 	var Structures = __webpack_require__(5);
-	var Asteroids = __webpack_require__(4);
+	var someObject = __webpack_require__(4);
+	var Obj = __webpack_require__(6);
 
 	var meltDown = new Terminal({
 	  textColor: "white",
@@ -159,9 +160,8 @@
 	    termResize();
 	    termReposition();
 	    addCanvas();
-	    addPlayer3();
-	    addBorder();
-	    aaTerm7.open();
+	    setupCanvas();
+	    aaTerm8.open();
 	  } else if(line_0A === "spit"){
 	    console.log(window.Structures.ex);
 	  }
@@ -936,7 +936,7 @@
 
 	var aaTerm8 = new Terminal({
 	  handler: aaHandler8,
-	  greeting: "##FrontEnd##\n>\n>\nNice. Lets see how you do with some speed.\nUse \'#set\' to set the game followed by \'#bringit\' to begin.",
+	  greeting: "##FrontEnd##\n>\n>\nNice. Lets see how you do with some speed.\nUse \'#bringit\' to begin.",
 	  termDiv:'second',
 	  crsrBlockMode: false,
 	  cols:100,
@@ -948,9 +948,11 @@
 	  console.log("here in 8");
 	  // this.charMode=true;
 	  var line_H = this.lineBuffer;
-	  if (line_H === "#set"){
-	    setupCanvas();
-	  } else if (line_H === "#bringit"){
+	  if (line_H === "#bringit"){
+	    // someObject.Something();
+	    // var options = {"pos": 2, "vel": 3, "height": 17, "width": 21};
+	    // var mine = new someObject.MovingObject(options);
+	    // console.log("NO FUCKING WAY", mine.pos);
 	    bringIt();
 	    this.charMode = true;
 	    //begin movement
@@ -1439,12 +1441,10 @@
 	  context.fillRect(400, 70, 50, 180);
 	}
 
-
-
 	var setupCanvas = function(){
 	  curY = 100;
 	  curX = 0;
-	  Structures.draw.apply(context);
+	  Structures.set.apply(context);
 	  // context.fillStyle = "#FF0000";
 	  // context.fillRect(0, 100, 50, 50);
 	  // context.fillStyle = "#0000FF";
@@ -1867,46 +1867,29 @@
 
 
 	var up3 = function(){
+	  context.clearRect(curX, curY, 50, 50);
 	  if (curY >= (60)){
 	    curY -= 50;
 	  } else {
 	    curY = 10;
 	  }
-	  myCanvas.width = myCanvas.width;
-	  myCanvas.height = myCanvas.height;
-	    context.fillStyle = "#0000FF";
-	  context.fillRect(550, 10, 50, 230);
 	  context.fillStyle = "#FF0000";
 	  context.fillRect(curX, curY, 50, 50);
-	  if (curX >= 500 && curY < 50){
-	    nextLevel2();
-	    return;
-	  }
 	  console.log(curX, "x");
 	  console.log(curY, "y");
-	  addBorder2();
-	  checkGame();
 	};
 
 	var down3 = function(){
+	  context.clearRect(curX, curY, 50, 50);
 	  if (curY<(150)){
 	    curY += 50;
 	  } else {
 	    curY = 190;
 	  }
-	  myCanvas.width = myCanvas.width;
-	  myCanvas.height = myCanvas.height;
-	  context.fillStyle = "#0000FF";
-	  context.fillRect(550, 10, 50, 230);
 	  context.fillStyle = "#FF0000";
 	  context.fillRect(curX, curY, 50, 50);
-	  if (curX >= 500 && curY < 50){
-	    nextLevel2();
-	    return;
-	  }
 	  console.log(curX, "x");
 	  console.log(curY, "y");
-	  addBorder2();
 	  checkGame();
 	};
 
@@ -1926,6 +1909,7 @@
 	  aaTerm7.close();
 	  aaTerm8.open();
 	  context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+	  setupCanvas();
 	};
 
 	var checkGame = function(){
@@ -15623,20 +15607,17 @@
 /* 4 */
 /***/ function(module, exports) {
 
-	(function () {
-	  if (typeof Asteroids === "undefined") {
-	    window.Asteroids = {};
-	  }
+	  var someObject = {};
 
-	  var MovingObject = Asteroids.MovingObject = function (options) {
-	    this.pos = options.pos;
+	  var MovingObject = someObject.MovingObject = function (options) {
+	    this.xVal = options.xVal;
+	    this.yVal = options.yVal;
 	    this.vel = options.vel;
-	    this.radius = options.radius;
-	    this.color = options.color;
-	    this.game = options.game;
+	    this.height = options.height;
+	    this.width = options.width;
 	  };
 
-	  var Something = Asteroids.Something = function() {
+	  var Something = someObject.Something = function() {
 	    console.log("something worked");
 	  };
 
@@ -15645,17 +15626,13 @@
 	  };
 
 	  MovingObject.prototype.draw = function (ctx) {
-	    ctx.fillStyle = this.color;
-
-	    ctx.beginPath();
-	    ctx.arc(
-	      this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI, true
-	    );
-	    ctx.fill();
+	    ctx.fillStyle = "#000000";
+	    ctx.fillRect(this.xVal, this.yVal, this.width, this.height);
+	    ctx.move(this.vel);
 	  };
 
 	  MovingObject.prototype.isCollidedWith = function (otherObject) {
-	    // var centerDist = Asteroids.Util.dist(this.pos, otherObject.pos);
+	    // var centerDist = someObject.Util.dist(this.pos, otherObject.pos);
 	    // return centerDist < (this.radius + otherObject.radius);
 	  };
 
@@ -15667,30 +15644,23 @@
 	    //if the computer is busy the time delta will be larger
 	    //in this case the MovingObject should move farther in this frame
 	    //velocity of object is how far it should move in 1/60th of a second
-	    var velocityScale = timeDelta / NORMAL_FRAME_TIME_DELTA,
-	        offsetX = this.vel[0] * velocityScale,
-	        offsetY = this.vel[1] * velocityScale;
-
-	    this.pos = [this.pos[0] + offsetX, this.pos[1] + offsetY];
-
-	    if (this.game.isOutOfBounds(this.pos)) {
-	      if (this.isWrappable) {
-	        this.pos = this.game.wrap(this.pos);
-	      } else {
-	        this.remove();
-	      }
-	    }
+	    var velocityScale = timeDelta / NORMAL_FRAME_TIME_DELTA;
+	    this.xVal -= velocityScale;
 	  };
 
 	  MovingObject.prototype.remove = function () {
 	    this.game.remove(this);
 	  };
-	})();
+
+	  module.exports = someObject;
 
 
 /***/ },
 /* 5 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
+
+	var someObject = __webpack_require__(4);
+
 
 	var Structures = {
 	  spit: function(){
@@ -15704,23 +15674,28 @@
 	    } else {
 	      var y = 250 - (h + 10);
 	    }
-	    var x = Math.random() * (550 - 10);
+	    var x = 500;
 	    var w = 50;
 	    console.log(x,y,h,w);
-	    Structures.shift.apply(this,[x, y, w, h]);
+	    var options = {"xVal": x, "yVal": y, "vel": 3, "height": h, "width": w};
+	    var block = new someObject.MovingObject(options);
+	    block.draw(this);
 	  },
-	  draw: function(){
+	  set: function(){
 	    var context = this;
 	    context.fillStyle = "#FF0000";
 	    context.fillRect(0, 100, 50, 50);
-	    context.fillStyle = "#0000FF";
-	    context.fillRect(550, 10, 50, 230);
 	    context.fillStyle = "#ff5a00";
 	    context.fillRect(0, 0, 600, 10);
 	    context.fillStyle = "#ff5a00";
 	    context.fillRect(0, 240, 600, 10);
-	    context.fillRect(150, 10, 50, 180);
-	    context.fillRect(400, 70, 50, 180);
+	  },
+	  send: function(x, y, w, h){
+	    // var context = this;
+	    // for (var i = x; i > 0; i-=10){
+	    //   window.setTimeout(function(){context.fillRect(i,y,w,h);}, 1000);
+	    //   window.setTimeout(function(){context.clearRect(i,y,w,h);}, 1500);
+	    // }
 	  },
 	  ex: function(){
 	    for (var x = 0; x < 6; x++){
@@ -15739,6 +15714,29 @@
 	};
 
 	module.exports = Structures;
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	var myObj = new Thing(2, true);
+
+	function Thing(v1, v2) {
+	    // ...
+
+	    // pub methods
+	    this.init = function(){
+	        this.number = v1;
+	        this.bool = v2;
+	    };
+
+	    // ...
+
+	    this.init(); // <------------ added this
+	}
+
+	module.exports = myObj;
 
 
 /***/ }

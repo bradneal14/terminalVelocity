@@ -2,7 +2,8 @@ var Terminal = require('./termlib.js');
 var $ = require('jquery');
 var hash = require('./hash.js');
 var Structures = require("./structures.js");
-var Asteroids = require("./object.js");
+var someObject = require("./object.js");
+var Obj = require("./testing.js");
 
 var meltDown = new Terminal({
   textColor: "white",
@@ -113,9 +114,8 @@ function zeroTermHandler_A(){
     termResize();
     termReposition();
     addCanvas();
-    addPlayer3();
-    addBorder();
-    aaTerm7.open();
+    setupCanvas();
+    aaTerm8.open();
   } else if(line_0A === "spit"){
     console.log(window.Structures.ex);
   }
@@ -890,7 +890,7 @@ function aaHandler7(){
 
 var aaTerm8 = new Terminal({
   handler: aaHandler8,
-  greeting: "##FrontEnd##\n>\n>\nNice. Lets see how you do with some speed.\nUse \'#set\' to set the game followed by \'#bringit\' to begin.",
+  greeting: "##FrontEnd##\n>\n>\nNice. Lets see how you do with some speed.\nUse \'#bringit\' to begin.",
   termDiv:'second',
   crsrBlockMode: false,
   cols:100,
@@ -902,9 +902,11 @@ function aaHandler8(){
   console.log("here in 8");
   // this.charMode=true;
   var line_H = this.lineBuffer;
-  if (line_H === "#set"){
-    setupCanvas();
-  } else if (line_H === "#bringit"){
+  if (line_H === "#bringit"){
+    // someObject.Something();
+    // var options = {"pos": 2, "vel": 3, "height": 17, "width": 21};
+    // var mine = new someObject.MovingObject(options);
+    // console.log("NO FUCKING WAY", mine.pos);
     bringIt();
     this.charMode = true;
     //begin movement
@@ -1393,12 +1395,10 @@ function addBorder2(){
   context.fillRect(400, 70, 50, 180);
 }
 
-
-
 var setupCanvas = function(){
   curY = 100;
   curX = 0;
-  Structures.draw.apply(context);
+  Structures.set.apply(context);
   // context.fillStyle = "#FF0000";
   // context.fillRect(0, 100, 50, 50);
   // context.fillStyle = "#0000FF";
@@ -1821,46 +1821,29 @@ var down2 = function(){
 
 
 var up3 = function(){
+  context.clearRect(curX, curY, 50, 50);
   if (curY >= (60)){
     curY -= 50;
   } else {
     curY = 10;
   }
-  myCanvas.width = myCanvas.width;
-  myCanvas.height = myCanvas.height;
-    context.fillStyle = "#0000FF";
-  context.fillRect(550, 10, 50, 230);
   context.fillStyle = "#FF0000";
   context.fillRect(curX, curY, 50, 50);
-  if (curX >= 500 && curY < 50){
-    nextLevel2();
-    return;
-  }
   console.log(curX, "x");
   console.log(curY, "y");
-  addBorder2();
-  checkGame();
 };
 
 var down3 = function(){
+  context.clearRect(curX, curY, 50, 50);
   if (curY<(150)){
     curY += 50;
   } else {
     curY = 190;
   }
-  myCanvas.width = myCanvas.width;
-  myCanvas.height = myCanvas.height;
-  context.fillStyle = "#0000FF";
-  context.fillRect(550, 10, 50, 230);
   context.fillStyle = "#FF0000";
   context.fillRect(curX, curY, 50, 50);
-  if (curX >= 500 && curY < 50){
-    nextLevel2();
-    return;
-  }
   console.log(curX, "x");
   console.log(curY, "y");
-  addBorder2();
   checkGame();
 };
 
@@ -1880,6 +1863,7 @@ var nextLevel2 = function(){
   aaTerm7.close();
   aaTerm8.open();
   context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+  setupCanvas();
 };
 
 var checkGame = function(){
