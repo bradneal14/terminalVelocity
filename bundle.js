@@ -919,8 +919,17 @@
 	  var line_H = this.lineBuffer;
 	  if (line_H === "#play"){
 	    this.charMode=true;
+	    this.line_H = "#play";
 	    this.prompt();
-	  }
+	  } else if (this.inputChar !== this.termKey.UP &&
+	    this.inputChar !== this.termKey.DOWN &&
+	    this.inputChar !== this.termKey.LEFT &&
+	    this.inputChar !== this.termKey.RIGHT &&
+	    this.inputChar !== 0){
+	      this.newLine();
+	      this.type("command not recognized");
+	      this.prompt();
+	    }
 	  if (this.inputChar === this.termKey.LEFT) {
 	    left2();
 	  }else if (this.inputChar === this.termKey.RIGHT) {
@@ -929,21 +938,23 @@
 	    down2();
 	  } else if (this.inputChar === this.termKey.UP){
 	    up2();
-	  } else if (this.inputChar === this.termKey.POUND){
-	    console.log("pound");
-	    this.close();
 	  }
 	  // this.prompt();
 	}
 
+	var reset = function(){
+	  this.reset();
+	};
+
 	var aaTerm8 = new Terminal({
 	  handler: aaHandler8,
-	  greeting: "##FrontEnd##\n>\n>\nCongratulations you beat the game!!!",
+	  greeting: "##FrontEnd##\n>\n>\nCongratulations you beat the game!!!\n>\n>",
 	  termDiv:'second',
 	  crsrBlockMode: false,
 	  cols:100,
 	  rows:15,
-	  textColor: "white"
+	  textColor: "white",
+	  initHandler: reset
 	});
 
 	function aaHandler8(){
@@ -1905,6 +1916,8 @@
 	};
 
 	var nextLevel2 = function(){
+	  aaTerm7.reset();
+	  aaTerm7.charMode= false;
 	  context.clearRect(0, 0, myCanvas.width, myCanvas.height);
 	  context.fillStyle="#0000ff";
 	  context.fillRect(0, 0, myCanvas.width, myCanvas.height);
