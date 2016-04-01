@@ -870,8 +870,11 @@ var aaTerm7 = new Terminal({
 
 function aaHandler7(){
   console.log("here in 7");
-  this.charMode=true;
   var line_H = this.lineBuffer;
+  if (line_H === "#play"){
+    this.charMode=true;
+    this.prompt();
+  }
   if (this.inputChar === this.termKey.LEFT) {
     left2();
   }else if (this.inputChar === this.termKey.RIGHT) {
@@ -884,7 +887,7 @@ function aaHandler7(){
     console.log("pound");
     this.close();
   }
-  this.prompt();
+  // this.prompt();
 }
 
 var aaTerm8 = new Terminal({

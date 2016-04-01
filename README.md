@@ -53,21 +53,9 @@ The game progresses as you build on past achievements and continue towards rescu
 
 
 ### Getting There
-![Alt text](http://i.imgur.com/DmmFjKB.jpg)
-The Search index is kind of the central hub of the site. The page allows users to explore properties through links on the left and generates those links in conjunction with the bounds of the map on the right. For example, if you zoom on the map such that only one property's map marker is in view, that listing would also be the only property listed on the left side. The map markers are clickable, expanding to show a thumbnail image, which is also clickable as a link to that property's page.
+![Alt text]()
 
-### Viewing a listing
-![Alt Text](http://i.imgur.com/Qy4WhpP.jpg)
-Viewing a listing fairly straightforward. You have the property's information listed below the cover image. The photo of the property's owner is clickable, as is the owner's name in the information section below, with both links directing to the host's profile page. On the right you have the booking request box. Users can enter dates and the number of guests in their party. This request is intended for the owner who, in practice, would be able to accept or deny it.
-
-
-### Viewing a profile
-![Alt Text](http://i.imgur.com/DuWaMtl.png)
-Users can check out potential hosts by looking at their profile. Friendships can be attempted but are not guaranteed.
-
-### Editing a profile
-![Alt Text](http://i.imgur.com/muCULRX.png)
-This is the page on which a user may edit his or her profile. The information fields are pre-filled with the existing information the user has given. If a user wishes to edit some but not all fields, they may do so. This is also the place where users may add or delete properties.
+As the user progresses, it becomes clear that this is, in fact, going somewhere. Enjoy!
 
 
 ## Technology
