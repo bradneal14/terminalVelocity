@@ -45,6 +45,11 @@ In the spirit of compassion, checkpoint passwords are provided throughout the ga
 
 The game progresses such that you need to reposition the terminal in order to make room for the game.
 
+### Obstacles
+![Alt text](https://media.giphy.com/media/l0NhXmq2oljFwCQdq/giphy.gif)
+
+Some levels require outside resources and clever thinking.
+
 
 ### Starting to Come Together
 ![Alt text](http://i.imgur.com/2mqZMid.png)
@@ -53,14 +58,15 @@ The game progresses as you build on past achievements and continue towards rescu
 
 
 ### Getting There
-![Alt text]()
+![Alt text](https://media.giphy.com/media/l0NhXmq2oljFwCQdq/giphy.gif)
 
 As the user progresses, it becomes clear that this is, in fact, going somewhere. Enjoy!
 
 
 ## Technology
-+ React.js/Flux
-+ Ruby/Rails
++ termLib Library
++ JQuery
++ Canvas
 
 
-YardSuring was built using Ruby/Rails for the database (backend) and using React.js/Flux (frontend). YardSurfing makes use of the Google Maps API for it's map aspect, with a few customizations for the thumbnail links and black map markers. The site's styling uses bootstrap for some fundamental sizing and placement with the majority of the CSS being custom. Npm packages include react-router, linked-state and babel to support jsx. I am the only developer for this site.
+TerminalVelocity is written 100% in JavaScript. The termLib library provides the terminal emulator and input handler functionality. Much of the game is a progression of termLib items, replacing one with another as the user enters text and advances in gameplay.Examples include add JQuery selectors are responsible for the resizing and repositioning the terminal, as well as activating the hidden elements which are "added" to the game by the execution of intended commands. The game board itself is a canvas element, which in conjunction with the terminal input handlers and arrow key entries generates and renders on-screen movement.
