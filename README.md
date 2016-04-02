@@ -46,7 +46,7 @@ In the spirit of compassion, checkpoint passwords are provided throughout the ga
 The game progresses such that you need to reposition the terminal in order to make room for the game.
 
 ### Obstacles
-![Alt text](https://media.giphy.com/media/l0NhXmq2oljFwCQdq/giphy.gif)
+![Alt text](https://media.giphy.com/media/xThuWhSBCCed8cJ8OI/giphy.gif)
 
 Some levels require outside resources and clever thinking.
 
@@ -56,10 +56,6 @@ Some levels require outside resources and clever thinking.
 
 The game progresses as you build on past achievements and continue towards rescuing the game's source code from the crashed server.
 
-### Is That.. A Game?
-![Alt text]()
-
-I'm not sure what it is. But it looks like something
 
 ### Getting There
 ![Alt text](https://media.giphy.com/media/xThuWb545oLE1YjDoc/giphy.gif)
