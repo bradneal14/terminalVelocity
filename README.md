@@ -43,7 +43,7 @@ In the spirit of compassion, checkpoint passwords are provided throughout the ga
 ### Progress?
 ![Alt text](http://i.imgur.com/wrP9ST4.png)
 
-The game progresses such that you need to reposition the terminal in order to make room for the game.
+The game has the user execute commands to resize and reposition the terminal window in order to make room for the game.
 
 ### Obstacles
 ![Alt text](https://media.giphy.com/media/xThuWhSBCCed8cJ8OI/giphy.gif)
@@ -54,7 +54,7 @@ Some levels require outside resources and clever thinking.
 ### Starting to Come Together
 ![Alt text](http://i.imgur.com/2mqZMid.png)
 
-The game progresses as you build on past achievements and continue towards rescuing the game's source code from the crashed server.
+The game goes on the user builds on past achievements and continues towards rescuing the game's source code from the crashed server.
 
 
 ### Getting There
@@ -69,4 +69,4 @@ As the user progresses, it becomes clear that this is, in fact, going somewhere.
 + Canvas
 
 
-TerminalVelocity is written 100% in JavaScript. The termLib library provides the terminal emulator and input handler functionality. Much of the game is a progression of termLib items, replacing one with another as the user enters text and advances in gameplay.Examples include add JQuery selectors are responsible for the resizing and repositioning the terminal, as well as activating the hidden elements which are "added" to the game by the execution of intended commands. The game board itself is a canvas element, which in conjunction with the terminal input handlers and arrow key entries generates and renders on-screen movement.
+TerminalVelocity is written entirely in JavaScript. The termLib library provides the terminal emulator and input handler functionality. Much of the game is a progression of termLib items, replacing one with another as the user enters text and advances in gameplay.Examples include add JQuery selectors are responsible for the resizing and repositioning the terminal, as well as activating the hidden elements which are "added" to the game by the execution of intended commands. The game board itself is a canvas element, which in conjunction with the terminal input handlers and arrow key entries generates and renders on-screen movement.
