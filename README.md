@@ -54,7 +54,7 @@ Some levels require outside resources and clever thinking.
 ### Starting to Come Together
 ![Alt text](http://i.imgur.com/2mqZMid.png)
 
-The game goes on the user builds on past achievements and continues towards rescuing the game's source code from the crashed server.
+As the game goes on the user builds on past achievements and continues towards rescuing the game's source code from the crashed server. In this level we add the background and title to the page, it's harder than it looks.
 
 
 ### Getting There
