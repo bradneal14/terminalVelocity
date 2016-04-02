@@ -32,7 +32,7 @@ Users are required to follow basic commands in order to navigate the terminal en
 ### Backend
 ![Alt text](http://i.imgur.com/VtXsct5.png)
 
-Users have the ability to toggle between the "frontend" and "backend" terminals, with each "side" offering different environments and accepting different sorts of commands. The basic idea is that users spend time in the "frontend" collecting information and then, when ready, use that information to execute JavaScript commands in the backend. Be careful though, else you may encounter a system meltdown.
+Users have the ability to toggle between the "frontend" and "backend" terminals, with each "side" offering different environments and accepting different sorts of commands. The basic idea is that users spend time in the frontend collecting information and then, when ready, use that information to execute JavaScript commands in the backend. Be careful though, else you may encounter a system meltdown.
 
 ### System Meltdown
 ![Alt text](http://i.imgur.com/QJdNXUP.png)
@@ -69,4 +69,4 @@ As the user progresses, it becomes clear that this is, in fact, going somewhere.
 + Canvas
 
 
-TerminalVelocity is written entirely in JavaScript. The termLib library provides the terminal emulator and input handler functionality. Much of the game is a progression of termLib items, replacing one with another as the user enters text and advances in gameplay.Examples include add JQuery selectors are responsible for the resizing and repositioning the terminal, as well as activating the hidden elements which are "added" to the game by the execution of intended commands. The game board itself is a canvas element, which in conjunction with the terminal input handlers and arrow key entries generates and renders on-screen movement.
+TerminalVelocity is written entirely in JavaScript. The termLib library provides the terminal emulator and input handler functionality. Much of the game is a progression of termLib items, replacing one with another as the user enters text and advances in gameplay. JQuery selectors are responsible for the resizing and repositioning the terminal, as well as activating the hidden elements which are "added" to the game by the execution of intended commands by the user. The game board itself is a canvas element, which in conjunction with the terminal input handlers renders on-screen movement.
