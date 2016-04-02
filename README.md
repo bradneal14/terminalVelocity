@@ -25,7 +25,7 @@ Terminal Velocity challenges users to:
 "Welcome to Terminal Velocity. Unfortunately we're having some technical difficulties right now.."
 
 ### Basics
-![Alt text](https://media.giphy.com/media/l0NhXmq2oljFwCQdq/giphy.gif)
+![Alt text](https://media.giphy.com/media/3o7WTpVvFUCI4wY8pO/giphy.gif)
 
 Users are required to follow basic commands in order to navigate the terminal environment in which they find themselves. The objective is the game is to rescue the source code from my crashed server and hack together a way to play the game despite the server crash.
 
