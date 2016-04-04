@@ -64,7 +64,7 @@ As the user progresses, it becomes clear that this is, in fact, going somewhere.
 
 
 ## Technology
-+ termLib Library
++ termLib.js
 + JQuery
 + Canvas
 
