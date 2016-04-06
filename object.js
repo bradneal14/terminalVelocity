@@ -6,6 +6,7 @@
     this.vel = options.vel;
     this.height = options.height;
     this.width = options.width;
+    
   };
 
   var Something = someObject.Something = function() {
